@@ -9,6 +9,7 @@ import { Calendar } from "@/components/ui/calendar"
 
 export default function TutorPage({ tutor, availableClasses, user, userData }) {
     const [clientSecret, setClientSecret] = useState()
+    const [date, setDate] = useState(new Date())
     const [state, setState] = useState("Buy classes")
     const [selectedPrice ,setSelectedPrice] = useState()
     const [numberOfClassesChosen, setNumberOfClassesChosen] = useState()
@@ -24,7 +25,23 @@ export default function TutorPage({ tutor, availableClasses, user, userData }) {
         appearance,
         loader
       }
-    const [date, setDate] = useState(new Date())
+
+    const getAvailableHours = async () => {    
+        const response = await fetch(`https://www.googleapis.com/calendar/v3/freeBusy?key=AIzaSyCR_ngnfLq-HNwlziHNIM12Y4CuKx0JNCs`, {
+            method: "POST", 
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                timeMin: "2024-02-20T09:00:00+01:00",
+                timeMax: "2024-03-4T17:00:00+01:00",
+                timeZone: "Europe/Madrid",
+                items: [{id: "primary"}],
+            }),
+          })
+          const data = await response.json()
+          console.log(data)
+    }
 
     const createPaymentIntent = async (price, nClasses) => {
         setSelectedPrice(price)
@@ -43,6 +60,10 @@ export default function TutorPage({ tutor, availableClasses, user, userData }) {
     useEffect(() => {
         console.log(availableClasses)
     }, [availableClasses])
+
+    useEffect(() => {
+        getAvailableHours()
+    }, [date])
     return (
         <main className="mb-24">
             {/*Header*/}
@@ -69,16 +90,22 @@ export default function TutorPage({ tutor, availableClasses, user, userData }) {
                 </div>
                 */}
             </div>
-            <div className="flex flex-col justify-center items-center bg-blue-200">
+            <div className="flex flex-col justify-center items-center">
                 <Calendar
                     mode="single"
                     selected={date}
                     onSelect={setDate}
                     className="rounded-md border w-max mx-8 md:mx-20 mt-12"
                 />
-                <input type="time" className="w-full border border-[#dddddd]"/>
+                <div className="grid grid-cols-2 w-full">
+                    <div className="w-full border border-[#dddddd] h-4"></div>
+                    <div className="w-full border border-[#dddddd] h-4"></div>
+                    <div className="w-full border border-[#dddddd] h-4"></div>
+                    <div className="w-full border border-[#dddddd] h-4"></div>
+                </div>
             </div>
-
+            
+            
         
         
         {/*
