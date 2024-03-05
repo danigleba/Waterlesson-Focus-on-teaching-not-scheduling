@@ -27,7 +27,7 @@ export default function TutorPage({ tutor, availableClasses, user, userData }) {
       }
 
     const getAvailableHours = async () => {    
-        const response = await fetch(`https://www.googleapis.com/calendar/v3/freeBusy?key=AIzaSyCR_ngnfLq-HNwlziHNIM12Y4CuKx0JNCs`, {
+        const response = await fetch(`https://www.googleapis.com/calendar/v3/freeBusy?key=${process.env.GOOGLE_CALENDAR_API}`, {
             method: "POST", 
             headers: {
               "Content-Type": "application/json",
