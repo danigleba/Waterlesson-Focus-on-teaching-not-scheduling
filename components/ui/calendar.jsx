@@ -37,10 +37,10 @@ function Calendar({
           "h-9 w-9 p-0 font-normal bg-white hover:bg-[#dddddd]"
         ),
         day_selected:
-          "overflow-hidden hover:bg-red-500 text-white bg-red-500 hover:bg-red-200  rounded-lg hover:text-white",
-        day_today: "bg-[#0d1220] hover:bg-[#0d1220] bg-opacity-100 hover:bg-opacity-100 active:text-white focus:text-white text-white bg-opacity-100",
+          "text-white hover:text-white bg-[#232323] hover:bg-[#232323]",
+        day_today: "bg-[#dddddd] cursor-default",
         day_outside:
-          "text-[#f4f4f4] duration-0 hover:bg-[#f4f4f4] bg-opacity-0 hover:bg-opacity-0 bg-[#f4f4f4] active:bg-[#f4f4f4] focus:bg-[#f4f4f4] cursor-default hover:text-[#ffffff00]",
+          "text-[#f4f4f4] duration-0 hover:bg-[#f4f4f4] hover:text-[#f4f4f4] bg-opacity-0 hover:bg-opacity-0 bg-[#f4f4f4] active:bg-[#f4f4f4] focus:bg-[#f4f4f4] cursor-default hover:text-[#ffffff00]",
         day_disabled: "opacity-100",
         day_hidden: "invisible",
         ...classNames,
