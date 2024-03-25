@@ -1,4 +1,3 @@
-import Image from "next/image"
 import { useEffect, useState } from "react"
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
@@ -11,7 +10,8 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST)
 export default function TutorPage({ tutor, user, userData }) {
     const [clientSecret, setClientSecret] = useState()
     const [date, setDate] = useState(new Date())
-    const times = [["09:00", "10:00"],["10:00", "11:00"],["11:00", "12:00"],["12:00", "13:00"],["13:00", "14:00"],["14:00", "15:00"],["15:00", "16:00"],["16:00", "17:00"],]
+    const [selectedDates, setSelectedDates] = useState([])
+    const [times, setTimes] = useState([["09:00", "10:00"],["10:00", "11:00"],["11:00", "12:00"],["12:00", "13:00"],["13:00", "14:00"],["14:00", "15:00"],["15:00", "16:00"],["16:00", "17:00"]])
     const [selectedPrice ,setSelectedPrice] = useState()
     const appearance = {
         theme: "stripe",
@@ -35,13 +35,51 @@ export default function TutorPage({ tutor, user, userData }) {
           }
         })
         const data = await response.json()
-        console.log(data.clientSecret)
         setClientSecret(`${data.clientSecret}`)
+    }
+
+    const addDateToCheckout = async (time) => {
+        setSelectedDates([...selectedDates, `${date.toString().substring(0, 11)} ${time} h`])
+    }
+
+    const removeDateFromCheckout = (date) => {
+        const newDates = selectedDates.filter(item => item !== date)
+        setSelectedDates(newDates)
+    }
+
+    const getCalendarAvaiability = async () => {
+        const url = "/api/googleCalendar/getEvents"
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ date: date })
+        })
+        const data = await response.json()
+        setTimes(data.data)
+    }
+
+    const createGoogleCalendarClass = async () => {
+        const url = "/api/googleCalendar/createEvent"
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ date: date })
+        })
+        const data = await response.json()
+        console.log(data.data)
     }
 
     useEffect(() => {
         createPaymentIntent()
     }, [])
+
+    useEffect(() => {
+        getCalendarAvaiability()
+    }, [date])
     return (
         <main className="mb-24 text-[#0d1220] mb-24">
             <div className="top-0 w-full h-24 md:h-36 bg-black">
@@ -63,40 +101,40 @@ export default function TutorPage({ tutor, user, userData }) {
                                 className="bg-[#f4f4f4] rounded-lg border border-[#dddddd] w-max shadow-[0px_0px_15px_rgb(0,0,0,0.02)]"/>
                         </div>
                         <div className="w-full h-72 space-y-3 rounded-lg font-light">
-                            {times.map((item, index) => (
+                            {times?.map((item, index) => (
                                 <div className="flex items-center justify-between w-full gap-3">
                                     <div key={index} className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4] duration-200 ease-in-out`}>
                                         <p className="font-medium text-sm truncate">{item[0]} a {item[1]}</p>
                                     </div>
-                                    <button className="flex items-center justify-center w-2/3 py-1 h-11 font-medium rounded-md text-white font-light bg-[#0d1220] truncate px-3">+ Añadir</button>
+                                    <button onClick={() => addDateToCheckout(`${item[0]}`)} className="flex items-center justify-center w-2/3 py-1 h-11 font-medium rounded-md text-white font-light bg-[#0d1220] truncate px-3">+ Añadir</button>
                                 </div>
                             ))}
                         </div>                        
                     </div>
                 </div>
-                <div className="lg:w-1/3 h-full border border-[#dddddd] shadow-[0px_0px_15px_rgb(0,0,0,0.02)] rounded-md bg-white text-center p-6 space-y-6">
-                            <div className="space-y-3 border-b border-[#dddddd] pb-6">
-                                <div className="flex items-center justify-between w-full px-6 py-3 border border-[#dddddd] rounded-md text-sm font-medium bg-[#f4f4f4] space-x-3">
-                                    <HiTrash size={18}/>
-                                    <p className="truncate">Sab 22 Feb, 6:00 pm</p>
-                                    <p className="w-max">24€</p>
-                                </div>                            
-                                <div className="flex items-center justify-between w-full px-6 py-3 border border-[#dddddd] rounded-md text-sm font-medium bg-[#f4f4f4] space-x-3">
-                                    <HiTrash size={18}/>
-                                    <p className="truncate">Sab 10 Feb, 12:00 pm</p>
-                                    <p>24€</p>
-                                </div>
-                                <p className="text-right font-bold text-4xl pt-3"><a className="font-light text-sm">total</a> 104.43 €</p>
+                {selectedDates?.length > 0 && (
+                    <div className="lg:w-1/3 h-full border border-[#dddddd] shadow-[0px_0px_15px_rgb(0,0,0,0.02)] rounded-md bg-white text-center p-6 space-y-6">
+                        <div className="space-y-3 border-b border-[#dddddd] pb-6">
+                            {selectedDates?.map((item, index) => (
+                                <div key={index} className="flex items-center justify-between w-full px-6 py-3 border border-[#dddddd] rounded-md text-sm font-medium bg-[#f4f4f4] space-x-6">
+                                    <button onClick={() => removeDateFromCheckout(item)}><HiTrash size={18}/></button>
+                                    <p className="truncate">{item}</p>
+                                    <p className="w-max">25€</p>
+                                </div>   
+                            ))}
+                            <p className="text-right font-bold text-4xl pt-3"><a className="font-light text-sm">total</a> {selectedDates?.length * 25} €</p>
+                        </div>
+                        {clientSecret && (
+                            <div className="flex justify-center">
+                                <Elements options={stripeOptions} stripe={stripePromise}>
+                                    <CheckoutForm clientSecret={clientSecret} user={user} userData={userData} tutor={tutor} selectedPrice={selectedPrice}/>
+                                </Elements>
                             </div>
-                            {clientSecret && (
-                                <div className="flex justify-center">
-                                    <Elements options={stripeOptions} stripe={stripePromise}>
-                                        <CheckoutForm clientSecret={clientSecret} user={user} userData={userData} tutor={tutor} selectedPrice={selectedPrice}/>
-                                    </Elements>
-                                </div>
-                            )}
-                        <button className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">Comprar clases</button>
-                </div>
+                        )}
+                        <button onClick={() => createGoogleCalendarClass()} className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">Comprar clases</button>
+                    </div>
+                )}
+                
             </div>
         </main>
     )

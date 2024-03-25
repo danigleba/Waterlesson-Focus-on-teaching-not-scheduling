@@ -8,7 +8,7 @@ import { buttonVariants } from "@/components/ui/button"
 function Calendar({
   className,
   classNames,
-  showOutsideDays = true,
+  showOutsideDays = false,
   ...props
 }) {
   return (
@@ -34,13 +34,13 @@ function Calendar({
         cell: "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20 bg-",
         day: cn(
           buttonVariants({ variant: "ghost" }),
-          "h-9 w-9 p-0 font-normal bg-white hover:bg-[#dddddd]"
+          "h-9 w-9 p-0 font-normal hover:bg-[#dddddd]"
         ),
         day_selected:
-          "text-white hover:text-white bg-[#232323] hover:bg-[#232323]",
+          "bg-gray-800 text-white hover:text-white hover:bg-gray-800 focus:bg-gray-800 active:bg-gray-800",
         day_today: "bg-[#dddddd] cursor-default",
         day_outside:
-          "text-[#f4f4f4] duration-0 hover:bg-[#f4f4f4] hover:text-[#f4f4f4] bg-opacity-0 hover:bg-opacity-0 bg-[#f4f4f4] active:bg-[#f4f4f4] focus:bg-[#f4f4f4] cursor-default hover:text-[#ffffff00]",
+          "text-[#f4f4f4] duration-0 hover:bg-[#f4f4f4] hover:text-[#f4f4f4] bg-opacity-0 hover:bg-opacity-0 bg-[#f4f4f4] active:bg-[#f4f4f4] focus:bg-[#f4f4f4] cursor-default",
         day_disabled: "opacity-100",
         day_hidden: "invisible",
         ...classNames,
