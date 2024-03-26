@@ -1,12 +1,64 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
+import Image from "next/image"
+import { Inter } from "next/font/google"
+import { FaStar } from "react-icons/fa";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] })
 
 export default function Home() {
   return (
-    <main className={`${inter.className}`}>
-      <p>Landing page</p>
+    <main className={`${inter.className} pt-6 pb-12 bg-[#f9f9f9] text-[#1a100d]`}>
+      {/*Headers*/}
+      <div className="px-8 md:px-24 flex justify-between items-center h-12 w-full ">
+        <p className="font-extrabold text-2xl">🍎 Bookrs</p>
+      </div>
+      {/*Hero*/}
+      <div className="flex flex-col items-center justify-center w-full h-full space-y-12 my-12">
+        <h2 className="px-8 md:px-24 text-4xl md:text-5xl font-extrabold text-center">Plan classes & get paid in autopilot</h2>
+        <div className="px-8 md:px-24 w-full md:w-2/3 text-center text-xl space-y-6 md:space-y-2 font-medium">
+          <p className="">Let students book and pay for your classes automatically.</p><p>No more messy texting and asking for payments.</p><p>No more fees.</p><p><a className="bg-[#eb4c60] px-2 font-semibold text-white">Teach and get paid.</a> That's it.</p>
+        </div>
+        <button className="px-8 ms:px-24 bg-[#eb4c60] hover:bg-[#d63c4f] text-white text-xl shadow-[0px_0px_15px_rgb(0,0,0,0.02)] py-3 px-12 rounded-lg font-semibold">Start booking clases</button>
+      </div>
+      <div className="w-full px-0 md:px-24">
+        <video autoplay width="320" height="240" controls className="w-full md:rounded-2xl shadow-[0px_0px_15px_rgb(0,0,0,0.02)]" type="video/mp4" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
+      </div>
+      {/*Sales letter*/}
+      <div className="w-full flex item-center justify-center text-left px-8 md:px-24 py-16">
+        <div className="md:w-2/3 font-medium text-lg space-y-6">
+          <div className="mb-3 bg-cover bg-bottom bg-[url('https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/daniglebapuig%40gmail.com%2Fprofile-2023-2.jpg?alt=media&token=db51f04a-ef22-443d-94c2-78ca77385319')] w-16 md:w-20 aspect-square rounded-full"></div>
+          <p>👋 Hi, I'm Dani</p>
+          <p>My mom kept complaining about students not paying, not showing up, canceling 1 hour before, and giving her a constant headache.</p>
+          <p>All the existing tools were bad, old, and expensive.</p>
+          <p>So I built a solution.</p>
+          <p>Now it helps other teachers like my mom do what they love.<br/>Teach and get paid.</p>
+        </div>
+      </div>
+      {/*Testimonial*/}
+      <div className="flex flex-col items-center justify-center gap-6 mx-8 md:mx-24 text-center h-full rounded-lg">
+        <p className="font-bold text-xl md:text-3xl">I used to hate asking students to pay, the eternal WhatsApp ping pong, and trying to keep track of everything. <a className="bg-[#eb4c60] px-2 text-white">Now I just teach and get paid.</a></p>
+        <div className="flex text-yellow-400">
+          <FaStar size={30}/>
+          <FaStar size={30}/>
+          <FaStar size={30}/>
+          <FaStar size={30}/>
+          <FaStar size={30}/>
+        </div>
+        <div className="flex justify-center items-center gap-6">
+          <div className="bg-cover bg-bottom bg-[url('https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/bpuigvelasco66%40gmail.com%2Fberta.webp?alt=media&token=471ba214-e234-4f4c-a4e4-c259efbd3514')] w-16 aspect-square rounded-full"></div>
+          <div className="text-left">
+            <p className="font-bold text-xl">Berta Puig</p>
+            <p className="text-lg">Also known as my mom :)</p>
+          </div>
+        </div>
+      </div>
+      {/*CTA*/}
+      <div className="w-full px-8 md:px-24 mt-24">
+        <div className="flex flex-col justify-center items-center bg-[#1a100d] gap-16 px-12 py-16 text-white rounded-2xl">
+          <p className="font-extrabold text-3xl text-center">Just teach and get paid. </p>
+          <button className="w-full md:w-max bg-[#eb4c60] hover:bg-[#d63c4f] text-white text-lg shadow-[0px_0px_15px_rgb(0,0,0,0.02)] py-3 md:px-12 rounded-lg font-semibold">Start booking clases</button>
+        </div>
+      </div>
+      {/*Footer*/}
     </main>
-  );
+  )
 }

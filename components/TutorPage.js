@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Image from "next/image"
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
 import CheckoutForm from "@/components/CheckoutForm"
@@ -86,11 +87,10 @@ export default function TutorPage({ tutor, user, userData }) {
                 <div className="h-full w-full bg-cover bg-top bg-[url('/banner.jpeg')]"></div>
             </div>
             <div className="md:flex px-6 md:px-24 -mt-12 gap-24 space-y-48 md:space-y-0">
-                <div className="flex flex-col items-start justify-start w-full lg:w-2/3 gap-6 md:gap-12">
+                <div className="flex flex-col items-start justify-start w-full lg:w-2/3 gap-6">
                     <div>
-                        <div className="w-32 border-white border-4 aspect-square rounded-xl bg-cover bg-bottom bg-[url('/berta.webp')]"></div>
-                        <p className="font-bold text-xl mt-3">Berta Puig 🇪🇸 🇬🇧 🇫🇷 🇵🇱</p>
-                        <p>Profesora de Español con más de 20 años de experiencia</p>
+                        <div className="w-32 border-white border-4 aspect-square rounded-xl bg-cover bg-bottom bg-[#dddddd] overflow-hidden flex items-end"><Image alt="Profile picture" width={500} height={500} src={tutor?.profile_url}/></div>
+                        <p className="flex gap-2 font-bold text-xl mt-3">{tutor?.name}{tutor?.languages?.map((item) => (<p>{item}</p>))}</p>
                     </div>
                     <div className="lg:flex items-start h-full w-full md:gap-6 space-y-6 lg:space-y-0">
                         <div className="w-max flex md:block items-center justify-center">
