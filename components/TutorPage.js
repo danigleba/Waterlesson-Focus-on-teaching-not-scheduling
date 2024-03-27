@@ -24,7 +24,8 @@ export default function TutorPage({ tutor, user, userData }) {
       const stripeOptions = {
         clientSecret,
         appearance,
-        loader
+        loader,
+        locale: 'en'
     }
 
     const createPaymentIntent = async () => {
@@ -82,7 +83,7 @@ export default function TutorPage({ tutor, user, userData }) {
         getCalendarAvaiability()
     }, [date])
     return (
-        <main className="mb-24 text-[#0d1220] mb-24">
+        <main className="mb-24 text-[#1a100d] mb-24">
             <div className="top-0 w-full h-24 md:h-36 bg-black">
                 <div className="h-full w-full bg-cover bg-top bg-[url('/banner.jpeg')]"></div>
             </div>
@@ -106,7 +107,7 @@ export default function TutorPage({ tutor, user, userData }) {
                                     <div key={index} className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4] duration-200 ease-in-out`}>
                                         <p className="font-medium text-sm truncate">{item[0]} a {item[1]}</p>
                                     </div>
-                                    <button onClick={() => addDateToCheckout(`${item[0]}`)} className="flex items-center justify-center w-2/3 py-1 h-11 font-medium rounded-md text-white font-light bg-[#0d1220] truncate px-3">+ Añadir</button>
+                                    <button onClick={() => addDateToCheckout(`${item[0]}`)} className="flex items-center justify-center w-2/3 py-1 h-11 font-medium rounded-md text-white font-light bg-[#1a100d] truncate px-3">+ Add</button>
                                 </div>
                             ))}
                         </div>                        
@@ -131,7 +132,7 @@ export default function TutorPage({ tutor, user, userData }) {
                                 </Elements>
                             </div>
                         )}
-                        <button onClick={() => createGoogleCalendarClass()} className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">Comprar clases</button>
+                        <button onClick={() => createGoogleCalendarClass()} className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">Buy classes</button>
                     </div>
                 )}
                 
