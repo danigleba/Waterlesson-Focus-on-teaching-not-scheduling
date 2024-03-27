@@ -8,9 +8,9 @@ export default function Home() {
   return (
     <main className={`${inter.className} pt-6 pb-12 bg-[#f9f9f9] text-[#1a100d]`}>
       {/*Headers*/}
-      <div className="px-8 md:px-24 flex justify-start gap-3 items-center h-12 w-full ">
-        <p className="text-4xl">🍉</p>
-        <p className="font-extrabold text-2xl">Waterlesson</p>
+      <div className="px-8 md:px-24 flex justify-start gap-2 md:gap-3 items-center h-12 w-full ">
+        <p className="text-3xl md:text-4xl">🍉</p>
+        <p className="font-extrabold texl-xl md:text-2xl">Waterlesson</p>
       </div>
       {/*Hero*/}
       <div className="flex flex-col items-center justify-center w-full h-full pt-12 md:mt-16 mb-12">
@@ -47,7 +47,7 @@ export default function Home() {
         <div className="flex justify-center items-center gap-6">
           <div className="bg-cover bg-bottom bg-[url('https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/bpuigvelasco66%40gmail.com%2Fberta.webp?alt=media&token=471ba214-e234-4f4c-a4e4-c259efbd3514')] w-16 aspect-square rounded-full"></div>
           <div className="text-left">
-            <p className="font-bold text-xl">Berta Puig</p>
+            <p className="font-bold text-xl">Berta</p>
             <p className="text-lg">Also known as my mom :)</p>
           </div>
         </div>

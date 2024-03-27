@@ -113,29 +113,35 @@ export default function TutorPage({ tutor, user, userData }) {
                         </div>                        
                     </div>
                 </div>
-                {selectedDates?.length > 0 && (
-                    <div className="lg:w-1/3 h-full border border-[#dddddd] shadow-[0px_0px_15px_rgb(0,0,0,0.02)] rounded-md bg-white text-center p-6 space-y-6">
-                        <div className="space-y-3 border-b border-[#dddddd] pb-6">
-                            {selectedDates?.map((item, index) => (
-                                <div key={index} className="flex items-center justify-between w-full px-6 py-3 border border-[#dddddd] rounded-md text-sm font-medium bg-[#f4f4f4] space-x-6">
-                                    <button onClick={() => removeDateFromCheckout(item)}><HiTrash size={18}/></button>
-                                    <p className="truncate">{item}</p>
-                                    <p className="w-max">25€</p>
-                                </div>   
-                            ))}
-                            <p className="text-right font-bold text-4xl pt-3"><a className="font-light text-sm">total</a> {selectedDates?.length * 25} €</p>
+                <div className="lg:w-1/3 h-full border border-[#dddddd] shadow-[0px_0px_15px_rgb(0,0,0,0.02)] rounded-md bg-white text-center p-6 space-y-6">
+                    {selectedDates?.length == 0 && (
+                        <div className="flex flex-col justify-center text-left items-center py-24 mx-6">
+                            <p className="font-semilight text-lg"> Choose an hour to have class with {tutor?.name}</p>
                         </div>
-                        {clientSecret && (
-                            <div className="flex justify-center">
-                                <Elements options={stripeOptions} stripe={stripePromise}>
-                                    <CheckoutForm clientSecret={clientSecret} user={user} userData={userData} tutor={tutor} selectedPrice={selectedPrice}/>
-                                </Elements>
+                    )}
+                    {selectedDates?.length > 0 && (
+                        <>
+                            <div className="space-y-3 border-b border-[#dddddd] pb-6">
+                                {selectedDates?.map((item, index) => (
+                                    <div key={index} className="flex items-center justify-between w-full px-6 py-3 border border-[#dddddd] rounded-md text-sm font-medium bg-[#f4f4f4] space-x-6">
+                                        <button onClick={() => removeDateFromCheckout(item)}><HiTrash size={18}/></button>
+                                        <p className="truncate">{item}</p>
+                                        <p className="w-max">25€</p>
+                                    </div>   
+                                ))}
+                                <p className="text-right font-bold text-4xl pt-3"><a className="font-light text-sm">total</a> {selectedDates?.length * 25} €</p>
                             </div>
-                        )}
-                        <button onClick={() => createGoogleCalendarClass()} className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">Buy classes</button>
-                    </div>
-                )}
-                
+                            {clientSecret && (
+                                <div className="flex justify-center">
+                                    <Elements options={stripeOptions} stripe={stripePromise}>
+                                        <CheckoutForm clientSecret={clientSecret} user={user} userData={userData} tutor={tutor} selectedPrice={selectedPrice}/>
+                                    </Elements>
+                                </div>
+                            )}
+                            <button onClick={() => createGoogleCalendarClass()} className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">Buy classes</button>
+                        </>
+                    )}
+                </div>       
             </div>
         </main>
     )
