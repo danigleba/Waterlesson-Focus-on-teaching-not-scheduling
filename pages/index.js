@@ -13,7 +13,7 @@ export default function Home() {
         <p className="font-extrabold text-2xl">Waterlesson</p>
       </div>
       {/*Hero*/}
-      <div className="flex flex-col items-center justify-center w-full h-full pt-12 md:mt-24 mb-12">
+      <div className="flex flex-col items-center justify-center w-full h-full pt-12 md:mt-16 mb-12">
         <h2 className="px-8 md:px-24 text-4xl md:text-5xl font-extrabold text-center">Plan classes & get paid on autopilot</h2>
         <div className="px-8 md:px-24 w-full md:w-2/3 text-center text-xl space-y-3 md:space-y-2 font-medium py-6 pb-12">
           <p className="">Let students book and pay for your classes automatically.</p><p>No more messy texting and asking for payments.</p><p>No more fees.</p><p><a className="bg-[#eb4c60] px-2 font-semibold text-white">Teach and get paid.</a> That's it.</p>
