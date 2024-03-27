@@ -9,7 +9,7 @@ export default function Home() {
     <main className={`${inter.className} pt-6 pb-12 bg-[#f9f9f9] text-[#1a100d]`}>
       {/*Headers*/}
       <div className="px-8 md:px-24 flex justify-start gap-2 md:gap-3 items-center h-12 w-full ">
-        <p className="text-3xl md:text-4xl">🍉</p>
+        <p className="text-2xl md:text-4xl">🍉</p>
         <p className="font-extrabold texl-xl md:text-2xl">Waterlesson</p>
       </div>
       {/*Hero*/}

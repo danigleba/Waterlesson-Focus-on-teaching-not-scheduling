@@ -83,7 +83,7 @@ export default function TutorPage({ tutor, user, userData }) {
         getCalendarAvaiability()
     }, [date])
     return (
-        <main className="mb-24 text-[#1a100d] mb-24">
+        <main className="text-[#1a100d] mb-12">
             <div className="top-0 w-full h-24 md:h-36 bg-black">
                 <div className="h-full w-full bg-cover bg-top bg-[url('/banner.jpeg')]"></div>
             </div>
@@ -115,8 +115,13 @@ export default function TutorPage({ tutor, user, userData }) {
                 </div>
                 <div className="lg:w-1/3 h-full border border-[#dddddd] shadow-[0px_0px_15px_rgb(0,0,0,0.02)] rounded-md bg-white text-center p-6 space-y-6">
                     {selectedDates?.length == 0 && (
-                        <div className="flex flex-col justify-center text-left items-center py-24 mx-6">
-                            <p className="font-semilight text-lg"> Choose an hour to have class with {tutor?.name}</p>
+                        <div className="flex flex-col justify-center text-left items-center">
+                            <div className="flex w-full justify-between items-center gap-3 px-6 pb-6">
+                                <div className="w-1/6 border-b border-[#1a100d]"></div>
+                                <p className="font-semibold w-full text-center w-4/6">Book clases with {tutor?.name}</p>
+                                <div className="w-1/6 border-b border-[#1a100d]"></div>
+                            </div>
+                            <video autoPlay={true} loop={true} width="320" height="240" className="w-full rounded-md" muted={true} type="video/mp4" src="/book_tutorial.mov"></video>
                         </div>
                     )}
                     {selectedDates?.length > 0 && (
