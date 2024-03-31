@@ -115,12 +115,12 @@ export default function TutorPage({ tutor, user, userData }) {
         }
     }, [dates])
     return (
-        <main className="text-[#1a100d] mb-12">
+        <main className="text-[#1a100d] bg-white mb-12">
             <div className="top-0 w-full h-24 md:h-36 bg-black">
                 <div className="h-full w-full bg-cover bg-top bg-[url('/banner.jpeg')]"></div>
             </div>
             <div className="md:flex px-6 md:px-24 -mt-12 gap-24 space-y-48 md:space-y-0">
-                {/*Caledar and tiems*/}
+                {/*Caledar and times*/}
                 <div className="flex flex-col items-start justify-start w-full lg:w-2/3 gap-6">
                     <div>
                         <div className="w-32 border-white border-4 aspect-square rounded-xl bg-cover bg-bottom bg-[#dddddd] overflow-hidden flex items-end"><Image alt="Profile picture" width={500} height={500} src={tutor?.profile_url}/></div>
