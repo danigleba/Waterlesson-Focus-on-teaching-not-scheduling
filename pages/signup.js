@@ -84,7 +84,7 @@ export default function Home() {
                                 <p>Don't worry. It's <b>100% free</b>.</p>
                             </div>
                             <span>Your email</span>
-                            <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="youremail@example.com" className="w-full bg-white border border-[#1a100d] rounded-md px-3 py-2 placeholder:text-[#dddddd] text-light"></input>
+                            <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="youremail@example.com" className="w-full bg-white border border-[#1a100d] bg-white rounded-lg px-3 py-2.5 placeholder:text-[#dddddd] text-light"></input>
                             {errorMessage == true && (<p className="text-center text-sm text-red-400 pt-1">Write down your email so I can get in touch.</p>)}
                             <button onClick={() => sendEmail()}  className="mt-3 mb-12 w-full bg-[#eb4c60] hover:bg-[#d63c4f] text-white text-lg py-2 rounded-lg font-semibold">Get Waterlesson</button>
                             <p>PS: Check out <a className="text-blue-400 underline" target="_blank" href="/berta">my mom's page</a> to see what you'll get ;)</p>
