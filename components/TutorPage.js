@@ -119,7 +119,7 @@ export default function TutorPage({ tutor, user, userData }) {
             <div className="top-0 w-full h-24 md:h-36 bg-black">
                 <div className="h-full w-full bg-cover bg-top bg-[url('/banner.jpeg')]"></div>
             </div>
-            <div className="md:flex px-6 md:px-24 -mt-12 gap-24 space-y-48 md:space-y-0">
+            <div className="md:flex px-6 md:px-24 -mt-12 gap-24 space-y-12 md:space-y-0">
                 {/*Caledar and times*/}
                 <div className="flex flex-col items-start justify-start w-full lg:w-2/3 gap-6">
                     <div>
@@ -134,13 +134,13 @@ export default function TutorPage({ tutor, user, userData }) {
                                 onSelect={setDate}
                                 className="bg-[#f4f4f4] rounded-lg border border-[#dddddd] w-max shadow-[0px_0px_15px_rgb(0,0,0,0.02)]"/>
                         </div>
-                        <div className="w-full h-72 space-y-3 rounded-lg font-light">
+                        <div className="w-full h-full space-y-3 rounded-lg font-light">
                             {formatedTimes?.map((item, index) => (
                                 <div className="flex items-center justify-between w-full gap-3">
                                     <div key={index} className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4] duration-200 ease-in-out`}>
                                         <p className="font-medium text-sm truncate">{item[0]}</p>
                                     </div>
-                                    <button onClick={() => addDateToCheckout(`${item[0]}`, times[index])} className="flex items-center justify-center w-2/3 py-1 h-11 font-medium rounded-md text-white font-light bg-[#1a100d] truncate px-3">+ Add</button>
+                                    <button onClick={() => addDateToCheckout(`${item[0]}`, times[index])} className="flex items-center justify-center w-2/3 py-1 h-11 font-medium rounded-md text-white font-light bg-[#1a100d] truncate px-6">+ Add</button>
                                 </div>
                             ))}
                         </div>                        
