@@ -65,7 +65,7 @@ export default function CheckoutForm({ clientSecret, tutor, dates, endDates, for
           id="payment-element" 
           options={paymentElementOptions}/>
       </form>     
-      <button onClick={() => handleSubmit()} className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">{isLoading ? "Loading..." : "Buy classes"}</button>
+      <button onClick={() => handleSubmit()} className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">{isLoading ? "Loading..." : "Pay classes"}</button>
       {/*Confirmation Modal*/}
       {confirmationStatus && (
         <div className="flex items-center bg-[#1a100d] bg-opacity-70 justify-center fixed bottom-0 left-0 w-full h-full">

@@ -165,7 +165,7 @@ export default function TutorPage({ tutor, user, userData }) {
                                     <div key={index} className="flex items-center justify-between w-full px-6 py-3 border border-[#dddddd] rounded-md text-sm font-medium bg-[#f4f4f4] space-x-6">
                                         <button onClick={() => removeDateFromCheckout(item)}><HiTrash size={18}/></button>
                                         <p className="truncate">{item}</p>
-                                        <p className="w-max">25€</p>
+                                        <p className="w-max">25 €</p>
                                     </div>   
                                 ))}
                                 <p className="text-right font-bold text-4xl pt-3"><a className="font-light text-sm">total</a> {dates?.length * 25} €</p>
