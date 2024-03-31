@@ -6,8 +6,8 @@ export default async function handler(req, res) {
     const calendar = google.calendar({ version: "v3", auth })
     const times = [["09:00", "10:00"],["10:00", "11:00"],["11:00", "12:00"],["12:00", "13:00"],["13:00", "14:00"],["14:00", "15:00"],["15:00", "16:00"],["16:00", "17:00"],]
     try {
-        const nextDay = new Date(date);
-        nextDay.setDate(nextDay.getDate() + 1);
+        const nextDay = new Date(date)
+        nextDay.setDate(nextDay.getDate() + 1)
         const response = await calendar.events.list({
             calendarId: "12c47649a5f85653369d6d09a2c99404c2c175792a43e128cdf0f889f835034e@group.calendar.google.com",
             timeMin: date,
@@ -16,7 +16,6 @@ export default async function handler(req, res) {
             orderBy: "startTime",
         })
         const events = response.data.items
-        console.log(events)
         events.forEach(event => {
             const eventStartTime = new Date(event.start.dateTime)
             const eventEndTime = new Date(event.end.dateTime)
@@ -31,10 +30,24 @@ export default async function handler(req, res) {
                 }
             })
         })
-        console.log(times)
-        res.status(200).json({ data: times })
+        res.status(200).json({ times: times, formatedTimes: convertToAMPM(times) })
     } catch (err) {
         console.error("Error fetching calendar events:", err.message)
         res.status(500).json({ error: "Failed to fetch calendar events" })
     }
+}
+
+function convertToAMPM(times) {
+    const convertedTimes = []
+    times.forEach(pair => {
+        const startHour = parseInt(pair[0].substring(0, 2))
+        const endHour = parseInt(pair[1].substring(0, 2))
+        const startAMPM = startHour >= 12 ? " pm" : " am"
+        const endAMPM = endHour >= 12 ? " pm" : " am"
+        const startFormatted = `${startHour % 12 === 0 ? 12 : startHour % 12}${startAMPM}`
+        const endFormatted = `${endHour % 12 === 0 ? 12 : endHour % 12}${endAMPM}`
+        convertedTimes.push([startFormatted, endFormatted])
+    })
+
+    return convertedTimes
 }

@@ -2,22 +2,19 @@ import { useState } from "react"
 import { useRouter } from "next/router"
 import { PaymentElement, useStripe, useElements, LinkAuthenticationElement } from "@stripe/react-stripe-js"
 
-export default function CheckoutForm({ clientSecret, numberOfComments, videoId, videoTitle }) {
+export default function CheckoutForm({ clientSecret, tutor, dates, endDates, formatedDates }) {
   const router = useRouter()
   const stripe = useStripe()
   const elements = useElements()
   const paymentElementOptions = {
     layout: "tabs",
   }
-  const price = (parseInt(numberOfComments) / 1000) >= 0.5 ?  parseInt(numberOfComments) / 1000 : "1"
   const [email, setEmail] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const [status, setStatus] = useState("Requires Payment")
+  const [confirmationStatus, setConfirmationStatus] = useState(false)
   
   const handleSubmit = async (e) => {
-    e.preventDefault()
     setIsLoading(true)
-    handleSuccesfulPayment() 
     const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
@@ -28,104 +25,66 @@ export default function CheckoutForm({ clientSecret, numberOfComments, videoId, 
   
       stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
         if (paymentIntent.status == "requires_payment_method") setIsLoading(false)
-        if (paymentIntent.status == "succeeded") handleSuccesfulPayment()
+        if (paymentIntent.status == "succeeded") bookClassesInCalendar()
     })
   }
 
-  const getAllComments = async () => {
-    try {
-      const response = await fetch(`/api/youtube/getComments?videoId=${videoId}`)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`)
-      }
-      const data = await response.json()
-      const comments = data.comments.map(
-        (comment, index) =>
-          `${comment.text}`
-      )
-
-      const allComments = comments.join("-")
-      return allComments.replaceAll("<br>", "")
-    } 
-    catch (error) {
-      console.error("Error fetching comments:", error.message)
-    } 
-  }
-
-  const filterComments = async (comments) => {
-    try {
-      const response = await fetch("/api/openai/filterComments", {
-        method: "POST", 
+  const createEvent = async (startTime, endTime) => {
+    const url = "https://danigleba.app.n8n.cloud/webhook/03c3a674-d776-4522-b275-24f03f4dabfc"
+    const response = await fetch(url, {
+        method: "POST",
         headers: {
-          "Content-Type": "application/json",
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify({ comments }), 
-      })
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`)
-      }
+        body: JSON.stringify({ start: startTime, end: endTime, email: "daniglebapuig@gmail.com", tutorName: tutor?.name, tutorEmail: "dani@waterlesson.com"})
+    })
+    const data = await response.json()
+  } 
 
-      const data = await response.json()
-      return data.data.message.content
-    } 
-    catch (error) {
-      console.error("Error fetching comments:", error.message)
-    } 
-  }
-
-  const uploadToFirebase = async (aiResponse) => {
+  const bookClassesInCalendar = async () => {
     try {
-      const response = await fetch(`/api/firebase/uploadReport?email=${email}&videoId=${videoId}`, {
-        method: "POST", 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ aiResponse }), 
-      })
-    } 
-    catch (error) {
-      console.error("Error fetching comments:", error.message)
-    } 
-  }
-
-  const sendEmail = async (filteredComments, email) => {
-    try {
-      const response = await fetch(`/api/resend/sendEmail?email=${email}&videoId=${videoId}&videoTitle=${videoTitle}`, {
-        method: "POST", 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ filteredComments }), 
-      })
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`)
+      for (let i = 0; i < dates.length; i++) {
+        await createEvent(dates[i], endDates[i])
       }
-    } 
-    catch (error) {
-      console.error("Error fetching comments:", error.message)
-    } 
-  }
-
-  const handleSuccesfulPayment = async () => {
-    setStatus("Filtering comments")
-    const comments = await getAllComments()
-    const filteredComments = await filterComments(comments)
-    await uploadToFirebase(filteredComments)
-    await sendEmail(filteredComments, email)
-    router.push(`/report/${email}-${videoId}`)
+      setConfirmationStatus(true)
+    } catch (error) {
+      console.log(error)
+    }
+   
   }
   return (
     <>
-        <form id="payment-form" onSubmit={handleSubmit} className="w-full">
-          <LinkAuthenticationElement
-            id="email-element"
-            options={paymentElementOptions}
-            onChange={(e) => setEmail(e.value.email)}
-            className="pb-3" />
-          <PaymentElement 
-            id="payment-element" 
-            options={paymentElementOptions}/>
-        </form>     
+      <form id="payment-form" onSubmit={handleSubmit} className="w-full">
+        <LinkAuthenticationElement
+          id="email-element"
+          options={paymentElementOptions}
+          onChange={(e) => setEmail(e.value.email)}
+          className="pb-3" />
+        <PaymentElement 
+          id="payment-element" 
+          options={paymentElementOptions}/>
+      </form>     
+      <button onClick={() => handleSubmit()} className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">{isLoading ? "Loading..." : "Buy classes"}</button>
+      {/*Confirmation Modal*/}
+      {confirmationStatus && (
+        <div className="flex items-center bg-[#1a100d] bg-opacity-70 justify-center fixed bottom-0 left-0 w-full h-full">
+          <div className="md:w-1/2 full bg-white border border-[#dddddd] shadow-md rounded-lg mx-8 space-y-6 p-6">
+            <div className="space-y-1">
+              <p className="font-bold text-xl">You've schedualed {dates.length} classes with {tutor?.name}</p>
+              <p className="font-light text-sm">Find all your classes in Google Calendar</p>
+            </div>
+            {formatedDates?.map((item, index) => (
+              <div key={index} className="flex items-center justify-center w-full px-6 py-3 border border-[#dddddd] rounded-md text-sm font-medium bg-[#f4f4f4] space-x-6">
+                <p className="truncate">{item}</p>
+              </div>   
+            ))}
+            <div className="flex flex-col justify-center items-center space-y-3">
+              <button onClick={() => router.reload()} className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">Buy more classes</button>
+              <a href="https://calendar.google.com/calendar" target="_blank" className="border border-[#dddddd] hover:bg-[#dddddd] w-full font-base py-2 rounded-md">Go to my calendar</a>
+            </div>
+          </div>
+        </div>
+      )}  
     </>
   )
 }

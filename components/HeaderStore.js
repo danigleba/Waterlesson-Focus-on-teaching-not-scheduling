@@ -82,7 +82,6 @@ export default function HeaderStore(props) {
             body: JSON.stringify({ user: user })
         })
         const data = await response.json() 
-        console.log(data)
         setUserData(data.user)
     }
 

@@ -11,13 +11,17 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST)
 export default function TutorPage({ tutor, user, userData }) {
     const [clientSecret, setClientSecret] = useState()
     const [date, setDate] = useState(new Date())
-    const [selectedDates, setSelectedDates] = useState([])
-    const [times, setTimes] = useState([["09:00", "10:00"],["10:00", "11:00"],["11:00", "12:00"],["12:00", "13:00"],["13:00", "14:00"],["14:00", "15:00"],["15:00", "16:00"],["16:00", "17:00"]])
+    const [dates, setDates] = useState([])
+    const [endDates, setEndDates] = useState([])
+    const [formatedDates, setFormatedDates] = useState([])
+    const [times, setTimes] = useState()
+    const [formatedTimes, setFormatedTimes] = useState()
     const [selectedPrice ,setSelectedPrice] = useState()
+    const [email, setEmail] = useState()
     const appearance = {
         theme: "stripe",
         variables: {
-          colorPrimary: "#dddddd",
+          colorPrimary: "#f4f4f4",
         }
       }
       const loader = "auto" 
@@ -40,13 +44,39 @@ export default function TutorPage({ tutor, user, userData }) {
         setClientSecret(`${data.clientSecret}`)
     }
 
-    const addDateToCheckout = async (time) => {
-        setSelectedDates([...selectedDates, `${date.toString().substring(0, 11)} ${time} h`])
+    function convertToISOFormat(dateTimeString, timeString) {
+        const dateTime = new Date(dateTimeString)
+        const [hours, minutes] = timeString.split(":").map(Number)
+        dateTime.setHours(hours)
+        dateTime.setMinutes(minutes)
+        const year = dateTime.getFullYear()
+        const month = String(dateTime.getMonth() + 1).padStart(2, "0")
+        const day = String(dateTime.getDate()).padStart(2, "0")
+        const hoursISO = String(dateTime.getHours()).padStart(2, "0")
+        const minutesISO = String(dateTime.getMinutes()).padStart(2, "0")
+        const offsetMinutes = dateTime.getTimezoneOffset()
+        const offsetHours = Math.abs(offsetMinutes / 60)
+        const offsetSign = offsetMinutes < 0 ? "+" : "-"
+        const isoString = `${year}-${month}-${day}T${hoursISO}:${minutesISO}:00+01:00`
+        return isoString
+    }
+
+    const addDateToCheckout = async (formatedTime, time) => {
+        const newISODate = convertToISOFormat(`${date}`, `${time[0]}`)
+        setDates([...dates, `${newISODate}`])
+        setFormatedDates([...formatedDates, `${date.toString().substring(0, 11)}at ${formatedTime} CET`])
     }
 
     const removeDateFromCheckout = (date) => {
-        const newDates = selectedDates.filter(item => item !== date)
-        setSelectedDates(newDates)
+        const dateIndex = formatedDates.indexOf(date)
+        if (dateIndex !== -1) {
+            const newFormatedDates = [...formatedDates]
+            const newDates = [...dates]
+            newFormatedDates.splice(dateIndex, 1)
+            newDates.splice(dateIndex, 1)
+            setFormatedDates(newFormatedDates)
+            setDates(newDates)
+        }
     }
 
     const getCalendarAvaiability = async () => {
@@ -59,22 +89,10 @@ export default function TutorPage({ tutor, user, userData }) {
             body: JSON.stringify({ date: date })
         })
         const data = await response.json()
-        setTimes(data.data)
+        setFormatedTimes(data.formatedTimes)
+        setTimes(data.times)
     }
-
-    const createGoogleCalendarClass = async () => {
-        const url = "/api/googleCalendar/createEvent"
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ date: date })
-        })
-        const data = await response.json()
-        console.log(data.data)
-    }
-
+   
     useEffect(() => {
         createPaymentIntent()
     }, [])
@@ -82,12 +100,27 @@ export default function TutorPage({ tutor, user, userData }) {
     useEffect(() => {
         getCalendarAvaiability()
     }, [date])
+
+    //Getting the dates the google calendar events will end at
+    useEffect(() => {
+        if (dates.length > 0) {
+            const newEndDates = dates.map(date => {
+                const currentDate = new Date(date)
+                const endDate = new Date(currentDate)
+                endDate.setHours(currentDate.getHours() + 2) //Why 2 and not 1?
+                console.log(endDate)
+                return endDate.toISOString().replace(".000Z", "+01:00")
+            })
+            setEndDates(newEndDates)
+        }
+    }, [dates])
     return (
         <main className="text-[#1a100d] mb-12">
             <div className="top-0 w-full h-24 md:h-36 bg-black">
                 <div className="h-full w-full bg-cover bg-top bg-[url('/banner.jpeg')]"></div>
             </div>
             <div className="md:flex px-6 md:px-24 -mt-12 gap-24 space-y-48 md:space-y-0">
+                {/*Caledar and tiems*/}
                 <div className="flex flex-col items-start justify-start w-full lg:w-2/3 gap-6">
                     <div>
                         <div className="w-32 border-white border-4 aspect-square rounded-xl bg-cover bg-bottom bg-[#dddddd] overflow-hidden flex items-end"><Image alt="Profile picture" width={500} height={500} src={tutor?.profile_url}/></div>
@@ -102,19 +135,20 @@ export default function TutorPage({ tutor, user, userData }) {
                                 className="bg-[#f4f4f4] rounded-lg border border-[#dddddd] w-max shadow-[0px_0px_15px_rgb(0,0,0,0.02)]"/>
                         </div>
                         <div className="w-full h-72 space-y-3 rounded-lg font-light">
-                            {times?.map((item, index) => (
+                            {formatedTimes?.map((item, index) => (
                                 <div className="flex items-center justify-between w-full gap-3">
                                     <div key={index} className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4] duration-200 ease-in-out`}>
-                                        <p className="font-medium text-sm truncate">{item[0]} a {item[1]}</p>
+                                        <p className="font-medium text-sm truncate">{item[0]}</p>
                                     </div>
-                                    <button onClick={() => addDateToCheckout(`${item[0]}`)} className="flex items-center justify-center w-2/3 py-1 h-11 font-medium rounded-md text-white font-light bg-[#1a100d] truncate px-3">+ Add</button>
+                                    <button onClick={() => addDateToCheckout(`${item[0]}`, times[index])} className="flex items-center justify-center w-2/3 py-1 h-11 font-medium rounded-md text-white font-light bg-[#1a100d] truncate px-3">+ Add</button>
                                 </div>
                             ))}
                         </div>                        
                     </div>
                 </div>
+                {/*Checkout modal*/}
                 <div className="lg:w-1/3 h-full border border-[#dddddd] shadow-[0px_0px_15px_rgb(0,0,0,0.02)] rounded-md bg-white text-center p-6 space-y-6">
-                    {selectedDates?.length == 0 && (
+                    {dates?.length == 0 && (
                         <div className="flex flex-col justify-center text-left items-center">
                             <div className="flex w-full justify-between items-center gap-3 px-6 pb-6">
                                 <div className="w-1/6 border-b border-[#1a100d]"></div>
@@ -124,26 +158,23 @@ export default function TutorPage({ tutor, user, userData }) {
                             <video autoPlay={true} loop={true} width="320" height="240" className="w-full rounded-md" muted={true} type="video/mp4" src="/book_tutorial.mov"></video>
                         </div>
                     )}
-                    {selectedDates?.length > 0 && (
+                    {dates?.length > 0 && (
                         <>
                             <div className="space-y-3 border-b border-[#dddddd] pb-6">
-                                {selectedDates?.map((item, index) => (
+                                {formatedDates?.map((item, index) => (
                                     <div key={index} className="flex items-center justify-between w-full px-6 py-3 border border-[#dddddd] rounded-md text-sm font-medium bg-[#f4f4f4] space-x-6">
                                         <button onClick={() => removeDateFromCheckout(item)}><HiTrash size={18}/></button>
                                         <p className="truncate">{item}</p>
                                         <p className="w-max">25€</p>
                                     </div>   
                                 ))}
-                                <p className="text-right font-bold text-4xl pt-3"><a className="font-light text-sm">total</a> {selectedDates?.length * 25} €</p>
+                                <p className="text-right font-bold text-4xl pt-3"><a className="font-light text-sm">total</a> {dates?.length * 25} €</p>
                             </div>
                             {clientSecret && (
-                                <div className="flex justify-center">
-                                    <Elements options={stripeOptions} stripe={stripePromise}>
-                                        <CheckoutForm clientSecret={clientSecret} user={user} userData={userData} tutor={tutor} selectedPrice={selectedPrice}/>
-                                    </Elements>
-                                </div>
+                                <Elements options={stripeOptions} stripe={stripePromise}>
+                                    <CheckoutForm clientSecret={clientSecret} tutor={tutor} dates={dates} endDates={endDates} formatedDates={formatedDates}/>
+                                </Elements>
                             )}
-                            <button onClick={() => createGoogleCalendarClass()} className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">Buy classes</button>
                         </>
                     )}
                 </div>       

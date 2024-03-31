@@ -17,16 +17,14 @@ export default function Student_id() {
   const [userData, setUserData] = useState({})
 
   const getTutor = async () => {
-    console.log(tutorId)
-      const response = await fetch(`/api/firebase/getTutor?tutorId=${tutorId}`, {
-        method: "POST", 
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      const data = await response.json()
-      console.log(data)
-      setTutor(data.tutor)
+    const response = await fetch(`/api/firebase/getTutor?tutorId=${tutorId}`, {
+      method: "POST", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    const data = await response.json()
+    setTutor(data.tutor)
   }
 
   const getUser = async () => {
@@ -55,7 +53,6 @@ export default function Student_id() {
     }
     return
   }
-  
 
   useEffect(() => {
     if (user) getUser()
