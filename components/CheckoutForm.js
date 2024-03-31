@@ -36,7 +36,7 @@ export default function CheckoutForm({ clientSecret, tutor, dates, endDates, for
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ start: startTime, end: endTime, email: "daniglebapuig@gmail.com", tutorName: tutor?.name, tutorEmail: "dani@waterlesson.com"})
+        body: JSON.stringify({ start: startTime, end: endTime, email: email, tutorName: tutor?.name, tutorEmail: tutor?.email, tutorURL: tutor?.url})
     })
     const data = await response.json()
   } 
@@ -47,6 +47,7 @@ export default function CheckoutForm({ clientSecret, tutor, dates, endDates, for
         await createEvent(dates[i], endDates[i])
       }
       setConfirmationStatus(true)
+      setIsLoading(false)
     } catch (error) {
       console.log(error)
     }
@@ -73,11 +74,13 @@ export default function CheckoutForm({ clientSecret, tutor, dates, endDates, for
               <p className="font-bold text-xl">You've schedualed {dates.length} classes with {tutor?.name}</p>
               <p className="font-light text-sm">Find all your classes in Google Calendar</p>
             </div>
-            {formatedDates?.map((item, index) => (
-              <div key={index} className="flex items-center justify-center w-full px-6 py-3 border border-[#dddddd] rounded-md text-sm font-medium bg-[#f4f4f4] space-x-6">
-                <p className="truncate">{item}</p>
-              </div>   
-            ))}
+            <div className="space-y-3">
+              {formatedDates?.map((item, index) => (
+                <div key={index} className="flex items-center justify-center w-full px-6 py-3 border border-[#dddddd] rounded-md text-sm font-medium bg-[#f4f4f4] space-x-6">
+                  <p className="truncate">{item}</p>
+                </div>   
+              ))}
+            </div>
             <div className="flex flex-col justify-center items-center space-y-3">
               <button onClick={() => router.reload()} className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">Buy more classes</button>
               <a href="https://calendar.google.com/calendar" target="_blank" className="border border-[#dddddd] hover:bg-[#dddddd] w-full font-base py-2 rounded-md">Go to my calendar</a>

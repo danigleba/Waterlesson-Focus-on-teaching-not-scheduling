@@ -57,7 +57,7 @@ export default function TutorPage({ tutor, user, userData }) {
         const offsetMinutes = dateTime.getTimezoneOffset()
         const offsetHours = Math.abs(offsetMinutes / 60)
         const offsetSign = offsetMinutes < 0 ? "+" : "-"
-        const isoString = `${year}-${month}-${day}T${hoursISO}:${minutesISO}:00+01:00`
+        const isoString = `${year}-${month}-${day}T${hoursISO}:${minutesISO}:00+02:00`
         return isoString
     }
 
@@ -107,9 +107,9 @@ export default function TutorPage({ tutor, user, userData }) {
             const newEndDates = dates.map(date => {
                 const currentDate = new Date(date)
                 const endDate = new Date(currentDate)
-                endDate.setHours(currentDate.getHours() + 2) //Why 2 and not 1?
+                endDate.setHours(currentDate.getHours() + 3) //Why 2 and not 1?
                 console.log(endDate)
-                return endDate.toISOString().replace(".000Z", "+01:00")
+                return endDate.toISOString().replace(".000Z", "+02:00")
             })
             setEndDates(newEndDates)
         }
