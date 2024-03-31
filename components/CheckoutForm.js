@@ -18,7 +18,7 @@ export default function CheckoutForm({ clientSecret, tutor, dates, endDates, for
     const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: "http://localhost:300",
+          return_url: "https://waterlesson.com",
         },
         redirect: "if_required"
       })

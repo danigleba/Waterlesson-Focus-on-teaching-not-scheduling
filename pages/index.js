@@ -47,7 +47,7 @@ export default function Home() {
           <button onClick={() => router.push("/signup")} className="px-12 md:px-16 bg-[#eb4c60] hover:bg-[#d63c4f] text-white text-lg shadow-md py-3 rounded-lg font-semibold">Get Waterlesson</button>
         </div>
         <div className="w-full px-0 md:px-24 md:py-12 py-6">
-          <video autoplay width="320" height="240" controls className="w-full md:rounded-2xl" type="video/mp4" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
+          <video autoplay width="320" height="240" controls className="w-full md:rounded-2xl" type="video/mp4" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
         </div>
         {/*Sales letter*/}
         <div className="w-full flex item-center justify-center text-left px-8 md:px-24 py-24">
