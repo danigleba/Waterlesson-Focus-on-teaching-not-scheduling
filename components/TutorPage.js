@@ -114,6 +114,10 @@ export default function TutorPage({ tutor, user, userData }) {
             setEndDates(newEndDates)
         }
     }, [dates])
+
+    useEffect(() => {
+        console.log(formatedDates)
+    }, [formatedDates])
     return (
         <main className="text-[#1a100d] bg-white mb-12">
             <div className="top-0 w-full h-24 md:h-36 bg-black">
@@ -123,7 +127,7 @@ export default function TutorPage({ tutor, user, userData }) {
                 {/*Caledar and times*/}
                 <div className="flex flex-col items-start justify-start w-full lg:w-2/3 gap-6">
                     <div>
-                        <div className="w-32 border-white border-4 aspect-square rounded-xl bg-cover bg-bottom bg-[#dddddd] overflow-hidden flex items-end"><Image alt="Profile picture" width={500} height={500} src={tutor?.profile_url}/></div>
+                        <div className="w-32 border-white border-4 aspect-square rounded-xl bg-cover bg-bottom bg-[#dddddd] overflow-hidden flex items-end"><Image loading="lazy" alt="Profile picture" width={500} height={500} src={tutor?.profile_url}/></div>
                         <p className="flex gap-2 font-bold text-xl mt-3">{tutor?.name}{tutor?.languages?.map((item) => (<p>{item}</p>))}</p>
                     </div>
                     <div className="lg:flex items-start h-full w-full md:gap-6 space-y-6 lg:space-y-0">
@@ -135,14 +139,40 @@ export default function TutorPage({ tutor, user, userData }) {
                                 className="bg-[#f4f4f4] rounded-lg border border-[#dddddd] w-max shadow-[0px_0px_15px_rgb(0,0,0,0.02)]"/>
                         </div>
                         <div className="w-full h-full space-y-3 rounded-lg font-light">
-                            {formatedTimes?.map((item, index) => (
-                                <div className="flex items-center justify-between w-full gap-3">
-                                    <div key={index} className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4] duration-200 ease-in-out`}>
-                                        <p className="font-medium text-sm truncate">{item[0]}</p>
+                            {formatedTimes && (
+                                <>
+                                    {formatedTimes?.map((item, index) => (
+                                        <div className="flex items-center justify-between w-full gap-3">
+                                            <div key={index} className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4] duration-200 ease-in-out`}>
+                                                <p className="font-medium text-sm truncate">{item[0]}</p>
+                                            </div>
+                                            <button onClick={() => addDateToCheckout(`${item[0]}`, times[index])} className="flex items-center justify-center w-2/3 py-1 h-11 font-medium rounded-md text-white font-light bg-[#1a100d] truncate px-6">+ Add</button>
+                                        </div>
+                                    ))}
+                                </>
+                            )}
+                            {!formatedTimes && (
+                                <>
+                                    <div className="flex items-center justify-between w-full gap-3">
+                                        <div className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 animate-pulse duration-1000 border-[#f4f4f4] px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4]`}></div>
                                     </div>
-                                    <button onClick={() => addDateToCheckout(`${item[0]}`, times[index])} className="flex items-center justify-center w-2/3 py-1 h-11 font-medium rounded-md text-white font-light bg-[#1a100d] truncate px-6">+ Add</button>
-                                </div>
-                            ))}
+                                    <div className="flex items-center justify-between w-full gap-3">
+                                        <div className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 animate-pulse duration-1000 border-[#f4f4f4] px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4]`}></div>
+                                    </div>
+                                    <div className="flex items-center justify-between w-full gap-3">
+                                        <div className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 animate-pulse duration-1000 border-[#f4f4f4] px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4]`}></div>
+                                    </div>
+                                    <div className="flex items-center justify-between w-full gap-3">
+                                        <div className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 animate-pulse duration-1000 border-[#f4f4f4] px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4]`}></div>
+                                    </div>
+                                    <div className="flex items-center justify-between w-full gap-3">
+                                        <div className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 animate-pulse duration-1000 border-[#f4f4f4] px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4]`}></div>
+                                    </div>
+                                    <div className="flex items-center justify-between w-full gap-3">
+                                        <div className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 animate-pulse duration-1000 border-[#f4f4f4] px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4]`}></div>
+                                    </div>
+                                </>
+                            )}
                         </div>                        
                     </div>
                 </div>
