@@ -94,7 +94,7 @@ export default function Home() {
                         <div className="pb-12 space-y-6">
                             <div className="bg-cover bg-bottom bg-[url('https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/daniglebapuig%40gmail.com%2Fprofile-2023-2.jpg?alt=media&token=db51f04a-ef22-443d-94c2-78ca77385319')] w-16 md:w-20 aspect-square rounded-full"></div>
                             <p className="font-bold text-xl">Got it!</p>
-                            <p>I'll email you the next steps ASAP.</p>
+                            <p>I'll email you the next steps as soon as possible.</p>
                             <p>Until then, check out <a className="text-blue-400 underline" target="_blank" href="/berta">my mom's page</a> to see what you'll get ;)</p>
                         </div>
                     )}
