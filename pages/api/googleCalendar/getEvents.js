@@ -22,7 +22,8 @@ export default async function handler(req, res) {
         })
         const events = response.data.items
         console.log(events.map((item) => item.start.dateTime))
-        events.forEach(event => {
+        res.status(200).json({ times: events.map((item) => item.start.dateTime), formatedTimes: events.map((item) => item.start.dateTime) })
+       /* events.forEach(event => {
             const eventStartTime = new Date(event.start.dateTime)
             const eventEndTime = new Date(event.end.dateTime)
             const eventStartHour = eventStartTime.getHours()
@@ -37,7 +38,7 @@ export default async function handler(req, res) {
             })
         })
         console.log(times)
-        res.status(200).json({ times: times, formatedTimes: convertToAMPM(times) })
+        res.status(200).json({ times: times, formatedTimes: convertToAMPM(times) })*/
     } catch (err) {
         console.error("Error fetching calendar events:", err.message)
         res.status(500).json({ error: "Failed to fetch calendar events" })
