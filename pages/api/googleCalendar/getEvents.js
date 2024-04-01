@@ -11,6 +11,7 @@ export default async function handler(req, res) {
         const response = await calendar.events.list({
             calendarId: "4663a55c1cbed0c6c34548d5031e14d69577bdf43b5936b9cbf9614ff3f25792@group.calendar.google.com",
             timeMin: date,
+            timeZone: "Europe/Madrid",
             timeMax: nextDay.toISOString(),
             singleEvents: true,
             orderBy: "startTime",
