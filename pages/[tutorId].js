@@ -8,8 +8,8 @@ import { Inter } from "next/font/google"
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Student_id() {
-    const router = useRouter()  
-    const { tutorId } = router.query 
+  const router = useRouter()  
+  const { tutorId } = router.query 
   const [tutor, setTutor] = useState({})
   const [tutorEmail, setTutorEmail] = useState()
   const [availableClasses, setAvailableClasses] = useState(0)
@@ -28,20 +28,15 @@ export default function Student_id() {
   }
 
   const getUser = async () => {
-    try {
-        const response = await fetch(`/api/auth/signupStudent`, {
-          method: "POST", 
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userId: Cookies.get("userCookie") }), 
-        })
-        const data = await response.json()
-        setUserData(data.data)
-      } 
-      catch (error) {
-        console.error("Error fetching comments:", error.message)
-      } 
+    const response = await fetch(`/api/auth/signupStudent`, {
+      method: "POST", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: Cookies.get("userCookie") }), 
+    })
+    const data = await response.json()
+    setUserData(data.data)
   }
 
   const findAvailableClasses = async () => {
