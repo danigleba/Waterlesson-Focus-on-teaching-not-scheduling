@@ -9,7 +9,7 @@ export default async function handler(req, res) {
         const nextDay = new Date(date)
         nextDay.setDate(nextDay.getDate() + 1)
         const response = await calendar.events.list({
-            calendarId: "12c47649a5f85653369d6d09a2c99404c2c175792a43e128cdf0f889f835034e@group.calendar.google.com",
+            calendarId: "4663a55c1cbed0c6c34548d5031e14d69577bdf43b5936b9cbf9614ff3f25792@group.calendar.google.com",
             timeMin: date,
             timeMax: nextDay.toISOString(),
             singleEvents: true,
