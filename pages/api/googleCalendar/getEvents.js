@@ -3,23 +3,24 @@ import next from "next"
 
 export default async function handler(req, res) {
     const { date } = req.body
-    console.log(date)
+    const startDate = new Date(date)
+    startDate.setHours(9, 0, 0, 0)
+    const endDate = new Date(startDate)
+    endDate.setHours(17, 0, 0, 0)
     const auth = "AIzaSyCR_ngnfLq-HNwlziHNIM12Y4CuKx0JNCs"
     const calendar = google.calendar({ version: "v3", auth })
     const times = [["09:00", "10:00"],["10:00", "11:00"],["11:00", "12:00"],["12:00", "13:00"],["13:00", "14:00"],["14:00", "15:00"],["15:00", "16:00"],["16:00", "17:00"],]
     try {
-        const nextDay = new Date(date)
-        nextDay.setDate(nextDay.getDate() + 1)
-        console.log(nextDay)
         const response = await calendar.events.list({
             calendarId: "4663a55c1cbed0c6c34548d5031e14d69577bdf43b5936b9cbf9614ff3f25792@group.calendar.google.com",
-            timeMin: date.replace(".000Z", "+02:00"),
-            timeZone: "Europe/Madrid",
-            timeMax: nextDay.toISOString().replace(".000Z", "+02:00"),
+            timeMin: startDate,
+            //timeZone: "Europe/Madrid",
+            timeMax: endDate,
             singleEvents: true,
             orderBy: "startTime",
         })
         const events = response.data.items
+        console.log(events.map((item) => item.start.dateTime))
         events.forEach(event => {
             const eventStartTime = new Date(event.start.dateTime)
             const eventEndTime = new Date(event.end.dateTime)
@@ -34,6 +35,7 @@ export default async function handler(req, res) {
                 }
             })
         })
+        console.log(times)
         res.status(200).json({ times: times, formatedTimes: convertToAMPM(times) })
     } catch (err) {
         console.error("Error fetching calendar events:", err.message)
