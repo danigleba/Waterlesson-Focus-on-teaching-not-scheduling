@@ -1,18 +1,21 @@
 import { google } from "googleapis"
+import next from "next"
 
 export default async function handler(req, res) {
     const { date } = req.body
+    console.log(date)
     const auth = "AIzaSyCR_ngnfLq-HNwlziHNIM12Y4CuKx0JNCs"
     const calendar = google.calendar({ version: "v3", auth })
     const times = [["09:00", "10:00"],["10:00", "11:00"],["11:00", "12:00"],["12:00", "13:00"],["13:00", "14:00"],["14:00", "15:00"],["15:00", "16:00"],["16:00", "17:00"],]
     try {
         const nextDay = new Date(date)
         nextDay.setDate(nextDay.getDate() + 1)
+        console.log(nextDay)
         const response = await calendar.events.list({
             calendarId: "4663a55c1cbed0c6c34548d5031e14d69577bdf43b5936b9cbf9614ff3f25792@group.calendar.google.com",
-            timeMin: date,
+            timeMin: date.replace(".000Z", "+02:00"),
             timeZone: "Europe/Madrid",
-            timeMax: nextDay.toISOString(),
+            timeMax: nextDay.toISOString().replace(".000Z", "+02:00"),
             singleEvents: true,
             orderBy: "startTime",
         })
