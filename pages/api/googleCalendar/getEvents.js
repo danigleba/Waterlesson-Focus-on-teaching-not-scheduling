@@ -3,9 +3,9 @@ import { google } from "googleapis"
 export default async function handler(req, res) {
     const { date } = req.body
     const startDate = new Date(date)
-    startDate.setHours(9, 0, 0, 0)
+    startDate.setHours(0, 0, 0, 0)
     const endDate = new Date(startDate)
-    endDate.setHours(17, 0, 0, 0)
+    endDate.setHours(24, 0, 0, 0)
     console.log(endDate)
     console.log(startDate)
     const auth = "AIzaSyCR_ngnfLq-HNwlziHNIM12Y4CuKx0JNCs"
