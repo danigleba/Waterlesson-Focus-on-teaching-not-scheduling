@@ -80,13 +80,15 @@ export default function TutorPage({ tutor, user, userData }) {
     }
 
     const getCalendarAvaiability = async () => {
+        const correctDate = new Date(date)
+        correctDate.setDate(date.getDay()+1)
         const url = "/api/googleCalendar/getEvents"
         const response = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ date: date })
+            body: JSON.stringify({ date: correctDate })
         })
         const data = await response.json()
         setFormatedTimes(data.formatedTimes)
