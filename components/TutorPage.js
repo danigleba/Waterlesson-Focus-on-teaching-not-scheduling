@@ -86,7 +86,7 @@ export default function TutorPage({ tutor, user, userData }) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ date: date.toLocaleString("en-US", { timeZone: 'Europe/Madrid', }) })
+            body: JSON.stringify({ date: date })
         })
         const data = await response.json()
         setFormatedTimes(data.formatedTimes)
