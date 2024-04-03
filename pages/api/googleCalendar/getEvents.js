@@ -14,7 +14,7 @@ export default async function handler(req, res) {
             calendarId: "4663a55c1cbed0c6c34548d5031e14d69577bdf43b5936b9cbf9614ff3f25792@group.calendar.google.com",
             timeMin: startDate,
             timeZone: "Europe/Madrid",
-            timeMax: endDate,
+            timeMax: startDate,
             singleEvents: true,
             orderBy: "startTime",
         })

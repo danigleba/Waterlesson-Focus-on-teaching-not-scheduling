@@ -47,7 +47,7 @@ export default function Home() {
           <button onClick={() => router.push("/signup")} className="px-12 md:px-16 bg-[#eb4c60] hover:bg-[#d63c4f] text-white text-lg shadow-md py-3 rounded-lg font-semibold">Get Waterlesson</button>
         </div>
         <div className="w-full px-0 md:px-24 md:py-12 py-6">
-          <video autoplay width="320" height="240" controls className="w-full md:rounded-2xl" type="video/mp4" src=""></video>
+        <div style={{position: "relative", paddingBottom: "56.25%", height: "0"}}><iframe style={{position: "absolute", top: "0", left: "0", width: "100%", height: "100%", border: "0"}} src="https://www.tella.tv/video/clujz20my00on0gl9faxdembb/embed?b=0&title=0&a=1&loop=0&t=0&muted=0&wt=0" allowfullscreen allowtransparency></iframe></div>
         </div>
         {/*Sales letter*/}
         <div className="w-full flex item-center justify-center text-left px-8 md:px-24 py-24">
