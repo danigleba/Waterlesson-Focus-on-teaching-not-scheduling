@@ -91,6 +91,7 @@ export default function TutorPage({ tutor, user, userData }) {
         const data = await response.json()
         setFormatedTimes(data.formatedTimes)
         setTimes(data.times)
+        console.log(data.date)
         console.log(data.formatedTimes)
         console.log(data.times)
 

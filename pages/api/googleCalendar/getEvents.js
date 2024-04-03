@@ -2,6 +2,7 @@ import { google } from "googleapis"
 
 export default async function handler(req, res) {
     const { date } = req.body
+    console.log(date)
     const startDate = new Date(date)
     startDate.setHours(0, 0, 0, 0)
     const endDate = new Date(startDate)
@@ -22,7 +23,7 @@ export default async function handler(req, res) {
         })
         const events = response.data.items
         console.log(events.map((item) => item.start.dateTime))
-        res.status(200).json({ times: events.map((item) => item.start.dateTime), formatedTimes: events.map((item) => item.start.dateTime) })
+        res.status(200).json({ date: date, times: events.map((item) => item.start.dateTime), formatedTimes: events.map((item) => item.start.dateTime) })
        /* events.forEach(event => {
             const eventStartTime = new Date(event.start.dateTime)
             const eventEndTime = new Date(event.end.dateTime)
