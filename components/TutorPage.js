@@ -124,7 +124,7 @@ export default function TutorPage({ tutor, user, userData }) {
     }, [formatedDates])
 
     useEffect(() => {
-        console.log(date)
+        //console.log(date)
     }, [date])
     return (
         <main className="text-[#1a100d] bg-white mb-12">
