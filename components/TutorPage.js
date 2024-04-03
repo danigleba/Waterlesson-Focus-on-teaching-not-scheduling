@@ -80,15 +80,13 @@ export default function TutorPage({ tutor, user, userData }) {
     }
 
     const getCalendarAvaiability = async () => {
-        const correctDate = new Date(date)
-        correctDate.setDate(date.getDay()+1)
         const url = "/api/googleCalendar/getEvents"
         const response = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ date: correctDate })
+            body: JSON.stringify({ date: date })
         })
         const data = await response.json()
         setFormatedTimes(data.formatedTimes)
@@ -116,10 +114,6 @@ export default function TutorPage({ tutor, user, userData }) {
             setEndDates(newEndDates)
         }
     }, [dates])
-
-    useEffect(() => {
-        console.log(formatedDates)
-    }, [formatedDates])
     return (
         <main className="text-[#1a100d] bg-white mb-12">
             <div className="top-0 w-full h-24 md:h-36 bg-black">

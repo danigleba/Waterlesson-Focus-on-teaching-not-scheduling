@@ -3,9 +3,9 @@ import { google } from "googleapis"
 export default async function handler(req, res) {
     const { date } = req.body
     const startDate = new Date(date)
-    startDate.setHours(0, 0, 0, 0)
+    startDate.setHours(5, 0, 0, 0)
     const endDate = new Date(startDate)
-    endDate.setHours(24, 0, 0, 0)
+    endDate.setHours(21, 0, 0, 0)
     const auth = "AIzaSyCR_ngnfLq-HNwlziHNIM12Y4CuKx0JNCs"
     const calendar = google.calendar({ version: "v3", auth })
     const times = [["09:00", "10:00"],["10:00", "11:00"],["11:00", "12:00"],["12:00", "13:00"],["13:00", "14:00"],["14:00", "15:00"],["15:00", "16:00"],["16:00", "17:00"],]
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
             orderBy: "startTime",
         })
         const events = response.data.items
-       events.forEach(event => {
+        events.forEach(event => {
             const eventStartTime = new Date(event.start.dateTime)
             const eventEndTime = new Date(event.end.dateTime)
             const eventStartHour = eventStartTime.getHours()
@@ -51,6 +51,5 @@ function convertToAMPM(times) {
         const endFormatted = `${endHour % 12 === 0 ? 12 : endHour % 12}${endAMPM}`
         convertedTimes.push([startFormatted, endFormatted])
     })
-
     return convertedTimes
 }
