@@ -93,10 +93,6 @@ export default function TutorPage({ tutor, user, userData }) {
         const data = await response.json()
         setFormatedTimes(data.formatedTimes)
         setTimes(data.times)
-        console.log(data.date)
-        console.log(data.formatedTimes)
-        console.log(data.times)
-
     }
    
     useEffect(() => {
@@ -124,10 +120,6 @@ export default function TutorPage({ tutor, user, userData }) {
     useEffect(() => {
         console.log(formatedDates)
     }, [formatedDates])
-
-    useEffect(() => {
-        //console.log(date)
-    }, [date])
     return (
         <main className="text-[#1a100d] bg-white mb-12">
             <div className="top-0 w-full h-24 md:h-36 bg-black">

@@ -13,6 +13,7 @@ function Calendar({
 }) {
   return (
     (<DayPicker
+      day_selected={undefined}
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
       classNames={{

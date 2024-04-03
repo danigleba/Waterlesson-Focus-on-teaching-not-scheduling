@@ -2,13 +2,10 @@ import { google } from "googleapis"
 
 export default async function handler(req, res) {
     const { date } = req.body
-    console.log(date)
     const startDate = new Date(date)
     startDate.setHours(0, 0, 0, 0)
     const endDate = new Date(startDate)
     endDate.setHours(24, 0, 0, 0)
-    console.log(endDate)
-    console.log(startDate)
     const auth = "AIzaSyCR_ngnfLq-HNwlziHNIM12Y4CuKx0JNCs"
     const calendar = google.calendar({ version: "v3", auth })
     const times = [["09:00", "10:00"],["10:00", "11:00"],["11:00", "12:00"],["12:00", "13:00"],["13:00", "14:00"],["14:00", "15:00"],["15:00", "16:00"],["16:00", "17:00"],]
@@ -22,9 +19,7 @@ export default async function handler(req, res) {
             orderBy: "startTime",
         })
         const events = response.data.items
-        console.log(events.map((item) => item.start.dateTime))
-        res.status(200).json({ date: date, times: events.map((item) => item.start.dateTime), formatedTimes: events.map((item) => item.start.dateTime) })
-       /* events.forEach(event => {
+       events.forEach(event => {
             const eventStartTime = new Date(event.start.dateTime)
             const eventEndTime = new Date(event.end.dateTime)
             const eventStartHour = eventStartTime.getHours()
@@ -38,8 +33,7 @@ export default async function handler(req, res) {
                 }
             })
         })
-        console.log(times)
-        res.status(200).json({ times: times, formatedTimes: convertToAMPM(times) })*/
+        res.status(200).json({ times: times, formatedTimes: convertToAMPM(times) })
     } catch (err) {
         console.error("Error fetching calendar events:", err.message)
         res.status(500).json({ error: "Failed to fetch calendar events" })
