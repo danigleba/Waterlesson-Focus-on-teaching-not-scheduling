@@ -8,8 +8,9 @@ import { HiTrash } from "react-icons/hi2"
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST)
 
-export default function TutorPage({ tutor, user, userData }) {
+export default function TutorPage({ tutor }) {
     const [clientSecret, setClientSecret] = useState()
+    const [currentDay, setCurrentDay] = useState()
     const [date, setDate] = useState(new Date())
     const [dates, setDates] = useState([])
     const [endDates, setEndDates] = useState([])
@@ -82,7 +83,7 @@ export default function TutorPage({ tutor, user, userData }) {
     const getCalendarAvaiability = async () => {
         setFormatedTimes()
         const newDate = new Date(date)
-        newDate.setDate(date.getDate() + 1)
+        newDate.setDate(date?.getDate() + 1)
         const url = "/api/googleCalendar/getEvents"
         const response = await fetch(url, {
             method: "POST",
@@ -117,6 +118,11 @@ export default function TutorPage({ tutor, user, userData }) {
             setEndDates(newEndDates)
         }
     }, [dates])
+
+    useEffect(() => {
+        const currentDate = new Date()
+        setCurrentDay(currentDate.getDate())
+    }, [])
     return (
         <main className="text-[#1a100d] bg-white mb-12">
             <div className="top-0 w-full h-24 md:h-36 bg-black">
@@ -138,7 +144,7 @@ export default function TutorPage({ tutor, user, userData }) {
                                 className="bg-[#f4f4f4] rounded-lg border border-[#dddddd] w-max shadow-[0px_0px_15px_rgb(0,0,0,0.02)]"/>
                         </div>
                         <div className="w-full h-full space-y-3 rounded-lg font-light">
-                            {formatedTimes && date.getDate() > 4 && (
+                            {formatedTimes && date.getDate() > currentDay && (
                                 <>
                                     {formatedTimes?.map((item, index) => (
                                         <div className="flex items-center justify-between w-full gap-3">
@@ -149,6 +155,13 @@ export default function TutorPage({ tutor, user, userData }) {
                                         </div>
                                     ))}
                                 </>
+                            )}
+                            {formatedTimes && date.getDate() <= currentDay && (
+                                 <div className="flex w-full h-full justify-between items-center gap-3 px-6 pb-6">
+                                    <div className="w-1/6 border-b border-[#1a100d]"></div>
+                                    <p className="font-semibold w-full text-center w-4/6">Choose a day in the future</p>
+                                    <div className="w-1/6 border-b border-[#1a100d]"></div>
+                                </div>
                             )}
                             {!formatedTimes && (
                                 <>
