@@ -19,19 +19,11 @@ export default async function handler(req, res) {
             orderBy: "startTime",
         })
         const events = response.data.items
-        console.log(startDate)
-        console.log(endDate)
-        console.log(events.map((item) => item.start.dateTime))
         await events.forEach(event => {
-            const eventStartTime = new Date(event.start.dateTime)
-            const eventEndTime = new Date(event.end.dateTime)
-            const eventStartHour = eventStartTime.getHours()
-            const eventEndHour = eventEndTime.getHours()
+            const eventStartTime = event.start.dateTime
+            const eventTime = eventStartTime.substring(11, 16)
             times.forEach((time, index) => {
-                const startTime = parseInt(time[0].split(":")[0])
-                const endTime = parseInt(time[1].split(":")[0])
-                if ((eventStartHour >= startTime && eventStartHour < endTime) ||
-                    (eventEndHour > startTime && eventEndHour <= endTime)) {
+                if (time[0] == eventTime) {
                     times.splice(index, 1)
                 }
             })

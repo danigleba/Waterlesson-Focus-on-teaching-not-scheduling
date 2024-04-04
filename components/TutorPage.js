@@ -81,7 +81,7 @@ export default function TutorPage({ tutor, user, userData }) {
 
     const getCalendarAvaiability = async () => {
         const newDate = new Date(date)
-        newDate.setDate(date.getDay() + 1)
+        newDate.setDate(date.getDate() + 1)
         const url = "/api/googleCalendar/getEvents"
         const response = await fetch(url, {
             method: "POST",
