@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         console.log(startDate)
         console.log(endDate)
         console.log(events.map((item) => item.start.dateTime))
-        events.forEach(event => {
+        await events.forEach(event => {
             const eventStartTime = new Date(event.start.dateTime)
             const eventEndTime = new Date(event.end.dateTime)
             const eventStartHour = eventStartTime.getHours()
