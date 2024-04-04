@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     startDate.setHours(5, 0, 0, 0)
     const endDate = new Date(startDate)
     endDate.setHours(21, 0, 0, 0)
-    const auth = "AIzaSyCR_ngnfLq-HNwlziHNIM12Y4CuKx0JNCs"
+    const auth = "AIzaSyDywj5WCCI0omAbhV5h4JqfmdzuxVK6Txk"
     const calendar = google.calendar({ version: "v3", auth })
     const times = [["09:00", "10:00"],["10:00", "11:00"],["11:00", "12:00"],["12:00", "13:00"],["13:00", "14:00"],["14:00", "15:00"],["15:00", "16:00"],["16:00", "17:00"],]
     try {
@@ -14,7 +14,7 @@ export default async function handler(req, res) {
             calendarId: "4663a55c1cbed0c6c34548d5031e14d69577bdf43b5936b9cbf9614ff3f25792@group.calendar.google.com",
             timeMin: startDate,
             timeZone: "Europe/Madrid",
-            timeMax: startDate,
+            timeMax: endDate,
             singleEvents: true,
             orderBy: "startTime",
         })
