@@ -28,8 +28,7 @@ export default async function handler(req, res) {
                 }
             })
         })
-        console.log(times)
-        res.status(200).json({ times: times, formatedTimes: convertToAMPM(times), startDate: startDate, endDate: endDate, events: events.map((item) => item.start.dateTime) })
+        res.status(200).json({ times: times, formatedTimes: convertToAMPM(times) })
     } catch (err) {
         console.error("Error fetching calendar events:", err.message)
         res.status(500).json({ error: "Failed to fetch calendar events" })
