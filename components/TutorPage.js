@@ -80,6 +80,7 @@ export default function TutorPage({ tutor, user, userData }) {
     }
 
     const getCalendarAvaiability = async () => {
+        setFormatedTimes()
         const newDate = new Date(date)
         newDate.setDate(date.getDate() + 1)
         const url = "/api/googleCalendar/getEvents"
