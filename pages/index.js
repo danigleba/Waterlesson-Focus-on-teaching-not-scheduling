@@ -3,6 +3,8 @@ import { Inter } from "next/font/google"
 import { useRouter } from "next/router"
 import { FaStar } from "react-icons/fa"
 import { Rubik } from "next/font/google"
+import { FaCheck } from "react-icons/fa6"
+import { GoGift } from "react-icons/go"
 
 const rubik = Rubik({ subsets: ["latin"] })
 const inter = Inter({ subsets: ["latin"] })
@@ -40,14 +42,34 @@ export default function Home() {
         </div>
         {/*Hero*/}
         <div className="flex flex-col items-center justify-center w-full h-full pt-12 md:mt-16 mb-12">
-          <h2 className={`${rubik.className}  px-8 md:px-24 text-4xl md:text-5xl font-extrabold text-center`}>Plan classes & get paid on autopilot</h2>
-          <div className="px-8 md:px-24 w-full md:w-2/3 text-center text-xl space-y-3 md:space-y-2 font-medium py-6 pb-12">
-            <p className="">Let students book and pay for your classes automatically.</p><p>No more messy texting and asking for payments.</p><p>No more fees.</p><p><a className="bg-[#eb4c60] px-2 font-semibold text-white">Teach and get paid.</a> That's it.</p>
+          <h2 className={`${rubik.className}  px-8 md:px-24 text-4xl md:text-6xl font-extrabold text-center`}>Focus on teaching,<br/> not shedualing</h2>
+          <div className="flex flex-col justify-center items-center px-8 md:px-24 w-full md:w-2/3 text-center text-xl space-y-3 md:space-y-2 font-medium pt-6 pb-20">
+            <p className="pt-6 pb-12 text-xl">Let students book and pay for your classes on their own.</p>
+            <div className="flex flex-col justify-center items-start gap-2 text-lg">
+              <div className="flex items-center justify-center gap-6">
+                <FaCheck size={15} className="text-green-600"/>
+                <p>Get your own shedualing website</p>
+              </div>
+              <div className="flex items-center justify-center gap-6">
+                <FaCheck size={15} className="text-green-600"/>
+                <p>Choose your working hours</p>
+              </div>
+              <div className="flex items-center justify-center gap-6">
+                <FaCheck size={15} className="text-green-600"/>
+                <p>Get payed before the class</p>
+              </div>
+              <div className="flex items-center justify-center gap-6">
+                <FaCheck size={15} className="text-green-600"/>
+                <p>0% fees</p>
+              </div>
+            </div>
           </div>
-          <button onClick={() => router.push("/signup")} className="px-12 md:px-16 bg-[#eb4c60] hover:bg-[#d63c4f] text-white text-lg shadow-md py-3 rounded-lg font-semibold">Get Waterlesson</button>
+          <button onClick={() => router.push("/signup")} className="px-12 md:px-16 bg-[#eb4c60] hover:bg-[#d63c4f] text-white text-lg shadow-md py-3 rounded-full font-semibold">Get Waterlesson</button>
+          <p className="flex items-center pt-6 font-medium gap-2 "><GoGift strokeWidth={0.4} className="text-green-600 animate-pulse" size={22}/><a className="text-green-600"><a className="font-medium">100% off</a> </a> for the first 5 users (2 left)</p>  
+            
         </div>
         <div className="w-full px-0 md:px-24 md:py-12 py-6">
-        <div style={{position: "relative", paddingBottom: "56.25%", height: "0"}}><iframe style={{position: "absolute", top: "0", left: "0", width: "100%", height: "100%", border: "0"}} src="https://www.tella.tv/video/clujz20my00on0gl9faxdembb/embed?b=0&title=0&a=1&loop=0&t=0&muted=0&wt=0" allowfullscreen allowtransparency></iframe></div>
+          <div style={{position: "relative", paddingBottom: "56.25%", height: "0"}}><iframe style={{position: "absolute", top: "0", left: "0", width: "100%", height: "100%", border: "0"}} src="https://www.tella.tv/video/clujz20my00on0gl9faxdembb/embed?b=0&title=0&a=1&loop=0&t=0&muted=0&wt=0" allowfullscreen allowtransparency></iframe></div>
         </div>
         {/*Sales letter*/}
         <div className="w-full flex item-center justify-center text-left px-8 md:px-24 py-24">
@@ -81,8 +103,8 @@ export default function Home() {
         {/*CTA*/}
         <div className="w-full px-8 md:px-24 pt-24">
           <div className="flex flex-col justify-center items-center bg-[#1a100d] gap-16 px-12 py-16 text-white rounded-2xl">
-            <p className={`${rubik.className}  font-extrabold text-3xl text-center`}>No more headaches. Just teach and get paid. </p>
-            <button onClick={() => router.push("/signup")}  className="px-12 md:px-16 bg-[#eb4c60] hover:bg-[#d63c4f] text-white text-lg shadow-md py-3 rounded-lg font-semibold">Get Waterlesson</button>
+            <p className={`${rubik.className}  font-extrabold text-3xl text-center`}>Focus on teaching, not shedualing</p>
+            <button onClick={() => router.push("/signup")}  className="px-12 md:px-16 bg-[#eb4c60] hover:bg-[#d63c4f] text-white text-lg shadow-md py-3 rounded-full font-semibold">Get Waterlesson</button>
           </div>
         </div>
       </main>

@@ -5,6 +5,7 @@ import { Elements } from "@stripe/react-stripe-js"
 import CheckoutForm from "@/components/CheckoutForm"
 import { Calendar } from "@/components/ui/calendar"
 import { HiTrash } from "react-icons/hi2"
+import { FaStar } from "react-icons/fa"
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST)
 
@@ -132,8 +133,18 @@ export default function TutorPage({ tutor }) {
                 {/*Caledar and times*/}
                 <div className="flex flex-col items-start justify-start w-full lg:w-2/3 gap-6">
                     <div>
-                        <div className="w-32 border-white border-4 aspect-square rounded-xl bg-cover bg-bottom bg-[#dddddd] overflow-hidden flex items-end"><Image loading="lazy" alt="Profile picture" width={500} height={500} src={tutor?.profile_url}/></div>
-                        <p className="flex gap-2 font-bold text-xl mt-3">{tutor?.name}{tutor?.languages?.map((item) => (<p>{item}</p>))}</p>
+                        <div className="w-32 border-white border-4 aspect-square rounded-xl bg-cover bg-bottom bg-[#dddddd] overflow-hidden flex items-end"><Image alt="Profile picture" priority={true} width={150} height={150} src={tutor?.profile_url}/></div>
+                        <div className="flex items-center mt-3 gap-2">
+                            <p className="flex font-bold text-xl">{tutor?.name}</p>
+                            <div className="flex text-yellow-400">
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                            </div>
+                        </div>
+                        <p className="font-medium">Book <a className="bg-[#eb4c60] text-white px-1">online {tutor?.language} classes</a> with {tutor?.name}. <br/>Adapted to your level, goals and learning style.</p>
                     </div>
                     <div className="lg:flex items-start h-full w-full md:gap-6 space-y-6 lg:space-y-0">
                         <div className="w-max flex md:block items-center justify-center">
@@ -207,10 +218,12 @@ export default function TutorPage({ tutor }) {
                                     <div key={index} className="flex items-center justify-between w-full px-6 py-3 border border-[#dddddd] rounded-md text-sm font-medium bg-[#f4f4f4] space-x-6">
                                         <button onClick={() => removeDateFromCheckout(item)}><HiTrash size={18}/></button>
                                         <p className="truncate">{item}</p>
-                                        <p className="w-max">25 €</p>
+                                        <p className="w-max">$25</p>
                                     </div>   
                                 ))}
-                                <p className="text-right font-bold text-4xl pt-3"><a className="font-light text-sm">total</a> {dates?.length * 25} €</p>
+                                <p className="text-right pt-3 font-medium flex justify-between items-center"><a className="bg-[#1a100d] text-white px-1">Online Spanish class with {tutor?.name} </a><a className="font-semibold">x {dates?.length}</a></p>
+                                <p className="text-right font-bold text-4xl "><a className="font-light text-sm">total</a> ${dates?.length * 25}</p>
+                                <p className="text-sm text-right font-light">All classes are 1 hour long.</p>
                             </div>
                             {clientSecret && (
                                 <Elements options={stripeOptions} stripe={stripePromise}>

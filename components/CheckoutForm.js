@@ -65,13 +65,13 @@ export default function CheckoutForm({ clientSecret, tutor, dates, endDates, for
           id="payment-element" 
           options={paymentElementOptions}/>
       </form>     
-      <button onClick={() => handleSubmit()} className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">{isLoading ? "Loading..." : "Pay classes"}</button>
+      <button onClick={() => handleSubmit()} className="bg-[#eb4c60] hover:bg-[#d63c4f] w-full font-medium text-white py-2 rounded-md">{isLoading ? "Loading..." : `Buy ${dates?.length} ${ dates?.length > 1 ? "classes" : "class"}`}</button>
       {/*Confirmation Modal*/}
       {confirmationStatus && (
         <div className="flex items-center bg-[#1a100d] bg-opacity-70 justify-center fixed bottom-0 left-0 w-full h-full">
           <div className="md:w-1/2 full bg-white border border-[#dddddd] shadow-md rounded-lg mx-8 space-y-6 p-6">
             <div className="space-y-1">
-              <p className="font-bold text-xl">You've schedualed {dates.length} classes with {tutor?.name}</p>
+              <p className="font-bold text-xl">You've schedualed {dates.length} {dates.length > 1 ? "classes" : "class" } with {tutor?.name}</p>
               <p className="font-light text-sm">Find all your classes in Google Calendar</p>
             </div>
             <div className="space-y-3">
