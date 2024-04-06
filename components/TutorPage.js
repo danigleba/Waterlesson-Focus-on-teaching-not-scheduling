@@ -112,8 +112,7 @@ export default function TutorPage({ tutor }) {
             const newEndDates = dates.map(date => {
                 const currentDate = new Date(date)
                 const endDate = new Date(currentDate)
-                endDate.setHours(currentDate.getHours() + 3) //Why 2 and not 1?
-                console.log(endDate)
+                endDate.setHours(currentDate.getHours() + 3) //Why 3 and not 1?
                 return endDate.toISOString().replace(".000Z", "+02:00")
             })
             setEndDates(newEndDates)
@@ -158,7 +157,7 @@ export default function TutorPage({ tutor }) {
                             {formatedTimes && date.getDate() > currentDay && (
                                 <>
                                     {formatedTimes?.map((item, index) => (
-                                        <div className="flex items-center justify-between w-full gap-3">
+                                        <div key={index} className="flex items-center justify-between w-full gap-3">
                                             <div key={index} className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4] duration-200 ease-in-out`}>
                                                 <p className="font-medium text-sm truncate">{item[0]}</p>
                                             </div>
@@ -221,7 +220,7 @@ export default function TutorPage({ tutor }) {
                                         <p className="w-max">$25</p>
                                     </div>   
                                 ))}
-                                <p className="text-right pt-3 font-medium flex justify-between items-center"><a className="bg-[#1a100d] text-white px-1">Online Spanish class with {tutor?.name} </a><a className="font-semibold">x {dates?.length}</a></p>
+                                <p className="text-right pt-3 font-medium flex justify-between items-center"><a className="bg-[#1a100d] text-white px-1">Online Spanish class with {tutor?.name}</a><a className="font-semibold">x {dates?.length}</a></p>
                                 <p className="text-right font-bold text-4xl "><a className="font-light text-sm">total</a> ${dates?.length * 25}</p>
                                 <p className="text-sm text-right font-light">All classes are 1 hour long.</p>
                             </div>

@@ -8,7 +8,7 @@ const rubik = Rubik({ subsets: ["latin"] })
 const inter = Inter({ subsets: ["latin"] })
 
 export default function Home() {
-    const [email, setEmail] = useState()
+    const [email, setEmail] = useState("")
     const [errorMessage, setErrorMessage] = useState(false)
     const [emailSaved, setEmailSaved] = useState(false)
 
@@ -81,7 +81,7 @@ export default function Home() {
                             <div className="space-y-6 pb-6">
                                 <p>Onboarding new teachers takes some manual work.</p>
                                 <p><b>Leave yor email</b> and I'll get in touch to set up your page.</p>
-                                <p>Don't worry. It's <b>100% free</b> for the first 5 users.</p>
+                                <p>Don't worry. It's <b>100% free</b> for beta users.</p>
                             </div>
                             <span>Your email</span>
                             <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="youremail@example.com" className="w-full bg-white border border-[#1a100d] bg-white rounded-lg px-3 py-2.5 placeholder:text-[#dddddd] text-light"></input>

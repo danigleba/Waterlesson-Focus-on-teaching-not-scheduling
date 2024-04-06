@@ -65,11 +65,14 @@ export default function Home() {
             </div>
           </div>
           <button onClick={() => router.push("/signup")} className="px-12 md:px-16 bg-[#eb4c60] hover:bg-[#d63c4f] text-white text-lg shadow-md py-3 rounded-full font-semibold">Get Waterlesson</button>
-          <p className="flex items-center pt-6 font-medium gap-2 "><GoGift strokeWidth={0.4} className="text-green-600 animate-pulse" size={22}/><a className="text-green-600"><a className="font-medium">100% off</a> </a> for the first 5 users (2 left)</p>  
-            
+          <div className="flex items-center pt-6 font-medium gap-2 ">
+            <GoGift strokeWidth={0.4} className="text-green-600 animate-pulse" size={22}/>
+            <p className="font-medium text-green-600">100% off</p> 
+            <p>for beta users (2 left)</p>
+          </div>    
         </div>
         <div className="w-full px-0 md:px-24 md:py-12 py-6">
-          <div style={{position: "relative", paddingBottom: "56.25%", height: "0"}}><iframe style={{position: "absolute", top: "0", left: "0", width: "100%", height: "100%", border: "0"}} src="https://www.tella.tv/video/clujz20my00on0gl9faxdembb/embed?b=0&title=0&a=1&loop=0&t=0&muted=0&wt=0" allowfullscreen allowtransparency></iframe></div>
+          <div style={{position: "relative", paddingBottom: "56.25%", height: "0"}}><iframe style={{position: "absolute", top: "0", left: "0", width: "100%", height: "100%", border: "0"}} src="https://www.tella.tv/video/clujz20my00on0gl9faxdembb/embed?b=0&title=0&a=1&loop=0&t=0&muted=0&wt=0" allowFullScreen></iframe></div>
         </div>
         {/*Sales letter*/}
         <div className="w-full flex item-center justify-center text-left px-8 md:px-24 py-24">
