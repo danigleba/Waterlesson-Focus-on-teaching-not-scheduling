@@ -30,7 +30,7 @@ export default function CheckoutForm({ clientSecret, tutor, dates, endDates, for
   }
 
   const createEvent = async (startTime, endTime) => {
-    const url = "https://danigleba.app.n8n.cloud/webhook/03c3a674-d776-4522-b275-24f03f4dabfc"
+    const url = "https://n8n-nqy6.onrender.com/webhook/03c3a674-d776-4522-b275-24f03f4dabfc"
     const response = await fetch(url, {
         method: "POST",
         headers: {
