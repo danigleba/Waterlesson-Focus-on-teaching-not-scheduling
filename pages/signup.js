@@ -80,7 +80,7 @@ export default function Home() {
                             </div>
                             <div className="space-y-6 pb-6">
                                 <p>Onboarding new teachers takes some manual work.</p>
-                                <p><b>Leave yor email</b> and I'll get in touch to set up your page.</p>
+                                <p><b>Leave your email</b> and I'll get in touch to set up your page.</p>
                                 <p>Don't worry. It's <b>100% free</b> for beta users.</p>
                             </div>
                             <span>Your email</span>

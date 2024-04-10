@@ -48,7 +48,7 @@ export default function Home() {
             <div className="flex flex-col justify-center items-start gap-2 text-lg">
               <div className="flex items-center justify-center gap-6">
                 <FaCheck size={15} className="text-green-600"/>
-                <p>Get your own shedualing website</p>
+                <p>Get your own scheduling website</p>
               </div>
               <div className="flex items-center justify-center gap-6">
                 <FaCheck size={15} className="text-green-600"/>
@@ -56,7 +56,7 @@ export default function Home() {
               </div>
               <div className="flex items-center justify-center gap-6">
                 <FaCheck size={15} className="text-green-600"/>
-                <p>Get payed before the class</p>
+                <p>Get paid before the class</p>
               </div>
               <div className="flex items-center justify-center gap-6">
                 <FaCheck size={15} className="text-green-600"/>
@@ -106,7 +106,7 @@ export default function Home() {
         {/*CTA*/}
         <div className="w-full px-8 md:px-24 pt-24">
           <div className="flex flex-col justify-center items-center bg-[#1a100d] gap-16 px-12 py-16 text-white rounded-2xl">
-            <p className={`${rubik.className}  font-extrabold text-3xl text-center`}>Focus on teaching, not shedualing</p>
+            <p className={`${rubik.className}  font-extrabold text-3xl text-center`}>Focus on teaching, not scheduling</p>
             <button onClick={() => router.push("/signup")}  className="px-12 md:px-16 bg-[#eb4c60] hover:bg-[#d63c4f] text-white text-lg shadow-md py-3 rounded-full font-semibold">Get Waterlesson</button>
           </div>
         </div>
