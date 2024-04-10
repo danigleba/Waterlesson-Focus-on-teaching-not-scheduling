@@ -39,7 +39,6 @@ function Calendar({
         ),
         day_selected:
           "bg-gray-800 text-white hover:text-white hover:bg-gray-800 focus:bg-gray-800 active:bg-gray-800",
-        day_today: "bg-[#dddddd]",
         day_outside:
           "text-[#f4f4f4] duration-0 hover:bg-[#f4f4f4] hover:text-[#f4f4f4] bg-opacity-0 hover:bg-opacity-0 bg-[#f4f4f4] active:bg-[#f4f4f4] focus:bg-[#f4f4f4] cursor-default",
         day_disabled: "opacity-100",
