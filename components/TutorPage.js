@@ -12,7 +12,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST)
 export default function TutorPage({ tutor }) {
     const [clientSecret, setClientSecret] = useState()
     const [currentDay, setCurrentDay] = useState()
-    const [date, setDate] = useState(new Date())
+    const [date, setDate] = useState()
     const [dates, setDates] = useState([])
     const [endDates, setEndDates] = useState([])
     const [formatedDates, setFormatedDates] = useState([])
@@ -154,7 +154,7 @@ export default function TutorPage({ tutor }) {
                                 className="bg-[#f4f4f4] rounded-lg border border-[#dddddd] w-max shadow-[0px_0px_15px_rgb(0,0,0,0.02)]"/>
                         </div>
                         <div className="w-full h-full space-y-3 rounded-lg font-light">
-                            {formatedTimes && date.getDate() > currentDay && (
+                            {formatedTimes && date?.getDate() > currentDay && (
                                 <>
                                     {formatedTimes?.map((item, index) => (
                                         <div key={index} className="flex items-center justify-between w-full gap-3">
@@ -166,7 +166,7 @@ export default function TutorPage({ tutor }) {
                                     ))}
                                 </>
                             )}
-                            {formatedTimes && date.getDate() <= currentDay && (
+                            {((formatedTimes && date?.getDate() <= currentDay) || !date) && (
                                  <div className="flex w-full h-full justify-between items-center gap-3 px-6 pb-6">
                                     <div className="w-1/6 border-b border-[#1a100d]"></div>
                                     <p className="font-semibold w-full text-center w-4/6">Choose a day in the future</p>
