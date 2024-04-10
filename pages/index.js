@@ -68,7 +68,7 @@ export default function Home() {
           <div className="flex items-center pt-6 font-medium gap-2 ">
             <GoGift strokeWidth={0.4} className="text-green-600 animate-pulse" size={22}/>
             <p className="font-medium text-green-600">100% off</p> 
-            <p>for beta users (2 left)</p>
+            <p>for beta users (1 left)</p>
           </div>    
         </div>
         <div className="w-full px-0 md:px-24 md:py-12 py-6">
