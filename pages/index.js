@@ -42,7 +42,7 @@ export default function Home() {
         </div>
         {/*Hero*/}
         <div className="flex flex-col items-center justify-center w-full h-full pt-12 md:mt-16 mb-12">
-          <h2 className={`${rubik.className}  px-8 md:px-24 text-4xl md:text-6xl font-extrabold text-center`}>Focus on teaching,<br/> not shedualing</h2>
+          <h2 className={`${rubik.className}  px-8 md:px-24 text-4xl md:text-6xl font-extrabold text-center`}>Focus on teaching,<br/> not scheduling</h2>
           <div className="flex flex-col justify-center items-center px-8 md:px-24 w-full md:w-2/3 text-center text-xl space-y-3 md:space-y-2 font-medium pt-6 pb-20">
             <p className="pt-6 pb-12 text-xl">Let students book and pay for your classes on their own.</p>
             <div className="flex flex-col justify-center items-start gap-2 text-lg">
