@@ -1,17 +1,16 @@
 import { useState } from 'react'
-import { FiMinus } from "react-icons/fi"
 import { Rubik } from "next/font/google"
-import { FaPlus } from "react-icons/fa6"
-
+import { FiMinus } from "react-icons/fi"
+import { FiPlus } from "react-icons/fi";
 const rubik = Rubik({ subsets: ["latin"] })
 
-export default function FAQ() {
+export default function Features() {
   const [activeIndex, setActiveIndex] = useState(null)
 
   const faqs = [
     {
-      question: 'Connect your calendar',
-      answer: 'Next.js is a React framework for building server-rendered applications.'
+      question: 'Do you work in my country?',
+      answer: 'Add one or multiple Stripe accounts to ZenVoice. It takes less than a minute. No coding required.'
     },
     {
       question: 'How do I recieve payments?',
@@ -20,11 +19,7 @@ export default function FAQ() {
     {
         question: 'What is Tailwind CSS?',
         answer: 'Tailwind CSS is a utility-first CSS framework for creating custom designs without having to leave your HTML.'
-    },
-    {
-        question: 'What is Tailwind CSS?',
-        answer: 'Tailwind CSS is a utility-first CSS framework for creating custom designs without having to leave your HTML.'
-    },
+    }
   ]
 
   const toggleFAQ = (index) => {
@@ -34,23 +29,23 @@ export default function FAQ() {
   return (
     <div className="w-full">
       {faqs.map((faq, index) => (
-        <div key={index} className="">
+        <div key={index} className={`${index == 1 ? "border-y border-[#dddddd]" : ""}`}>
           <button
-            className="w-full flex justify-between items-center rounded"
+            className={`w-full flex justify-between items-center rounded py-6`}
             onClick={() => toggleFAQ(index)}
-          >
-            <p className="font-semibold text-lg border-t border-[#dddddd] w-full py-5 text-left">{faq.question}</p>
+        >
+            <p className={`${rubik.className} font-semibold text-lg text-[#eb4c60]`}><a className="text-base">{index+1}.</a> {faq.question}</p>
             <div className='-ml-6 mr-12'>
                 {activeIndex == index && (
-                    <FiMinus size={22} strokeWidth={3}/>
+                    <FiMinus size={18} strokeWidth={2}/>
                 )}
                 {activeIndex != index && (
-                <   FaPlus size={21}/>
+                <   FiPlus size={18} strokeWidth={2}/>
                 )}
             </div>
           </button>
           {activeIndex === index && (
-            <p className="mt-2 mb-6">{faq.answer}</p>
+            <p className="mb-6">{faq.answer}</p>
           )}
         </div>
       ))}

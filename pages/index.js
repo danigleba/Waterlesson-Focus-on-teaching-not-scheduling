@@ -1,9 +1,11 @@
 import Head from "next/head"
+import { Rubik } from "next/font/google"
 import { Inter } from "next/font/google"
 import { useRouter } from "next/router"
 import { useState } from "react"
+import Footer from "@/components/Footer"
+import FAQ from "@/components/FAQ"
 import { FaStar } from "react-icons/fa"
-import { Rubik } from "next/font/google"
 import { FaCheck, FaQ } from "react-icons/fa6"
 import { GoGift } from "react-icons/go"
 import FeaturedOn from "@/components/FeaturedOn"
@@ -11,8 +13,8 @@ import { IoClose } from "react-icons/io5"
 import { FaGoogle } from "react-icons/fa"
 import { FiMinus } from "react-icons/fi"
 import { FaPlus } from "react-icons/fa6"
-import Footer from "@/components/Footer"
-import FAQ from "@/components/FAQ"
+import Features from "@/components/Features"
+
 const rubik = Rubik({ subsets: ["latin"] })
 const inter = Inter({ subsets: ["latin"] })
 
@@ -180,49 +182,14 @@ export default function Home() {
           </div>
         </div>
         {/*Featues*/}
-        <div className="w-full text-center h-full py-12 md:pt-24">
-          <h3 className={`${rubik.className} text-left mx-60`}>Self-service booking for your students</h3>
-          <div className="flex gap-0 items-center h-full mx-48">
-            <div className="flex flex-col justify-between h-full w-full text-left px-12 pb-12">
-              <div className="h-full w-full border-b border-[#dddddd] py-3">
-                <div className="flex items-center justify-between cursor-pointer py-3">
-                  <p className={`${rubik.className} font-semibold text-lg text-[#eb4c60]`}><a className="text-base">1.</a> Connect your calendar</p>
-                  <FiMinus />
-                </div>
-                {featuresAccordion.calendar == true && (
-                  <div className="pb-3">
-                    <p className=" text-normal font-medium">Add one or multiple Stripe accounts to ZenVoice. It takes less than a minute. No coding required.</p>
-                    <p className="flex items-center gap-1 text-sm font-semibold pt-3"><FaGoogle size={14}/>Powered by Google Calendar</p>
-                  </div>
-                )}
-              </div>
-              <div className="h-full w-full border-b border-[#dddddd] py-3">
-                <div className="flex items-center justify-between cursor-pointer py-3">
-                <p className={`${rubik.className} font-semibold text-lg text-[#1a100d]`}><a className="text-base">2.</a> Get your Waterlesson link</p>
-                  <FaPlus />
-                </div>
-                {featuresAccordion.link == true && (
-                  <div className="pb-3">
-                    <p className=" text-normal font-medium">Add one or multiple Stripe accounts to ZenVoice. It takes less than a minute. No coding required.</p>
-                    <p className="flex items-center gap-1 text-sm font-semibold pt-3"><FaGoogle size={14}/>Powered by Google Calendar</p>
-                  </div>
-                )}
-              </div>
-              <div className="h-full w-full py-3">
-                <div className="flex items-center justify-between cursor-pointer py-3">
-                <p className={`${rubik.className} font-semibold text-lg text-[#1a100d]`}><a className="text-base">3.</a> Students buy classes </p>
-                  <FaPlus />
-                </div>
-                {featuresAccordion.share == true && (
-                  <>
-                    <p className=" text-normal font-medium">Add one or multiple Stripe accounts to ZenVoice. It takes less than a minute. No coding required.</p>
-                    <p className="flex items-center gap-1 text-sm font-semibold pt-3"><FaGoogle size={14}/>Powered by Google Calendar</p>
-                  </>
-                )}
-                </div>
+        <div className="w-full text-center h-full px-6 py-12 md:pt-24">
+          <h3 className={`${rubik.className} text-left md:mx-60`}>Self-service booking for your students</h3>
+          <div className="flex flex-col md:flex-row gap-0 items-center h-full  md:mx-48">
+            <div className="flex flex-col justify-between h-full w-full text-left md:px-12 ">
+              <Features />               
             </div>
-            <div className="flex items-center justify-center w-full aspect-square rounded-xl mr-12">
-                <div className="w-4/5 h-4/5 bg-gray-700 rounded-xl"></div>
+            <div className="flex items-center justify-center w-full aspect-square rounded-xl md:mr-12">
+                <div className="w-full aspect-square pmd:w-4/5 md:h-4/5 bg-gray-700 rounded-xl"></div>
             </div>
           </div>
         </div>
@@ -301,7 +268,7 @@ export default function Home() {
           </div>
         </div>
          {/*Testimonial*/}
-         <div className="flex flex-col items-center justify-center gap-6 pb-32 text-center h-full rounded-lg bg-[#f9f9f9]">
+         <div className="flex flex-col items-center justify-center gap-6 pb-32 px-6 md:px-8 text-center h-full rounded-lg bg-[#f9f9f9]">
           <div className="flex text-yellow-500">
             <FaStar size={18}/>
             <FaStar size={18}/>
@@ -319,7 +286,7 @@ export default function Home() {
           </div>
         </div>
         {/*FAQ*/}
-        <div className="grid grid-cols-2 justify-center items-start w-full h-full px-24 bg-white my-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-center items-start w-full h-full px-6 md:px-24 space-y-12 md:space-y-0 bg-white my-24">
           <div className="w-full">
             <p className="font-bold text-[#eb4c60] pb-3">FAQ</p>
             <p className={`${rubik.className} font-bold text-3xl`}>Frequently Asked Questions</p>
@@ -327,7 +294,7 @@ export default function Home() {
           <FAQ />
         </div>
         {/*Testimonial*/}
-        <div className="flex flex-col items-center justify-center gap-6 pb-32 text-center h-full rounded-lg">
+        <div className="flex flex-col items-center justify-center gap-6 pb-32 px-6 md:px-8 text-center h-full rounded-lg">
           <div className="flex text-yellow-500">
             <FaStar size={18}/>
             <FaStar size={18}/>
@@ -346,8 +313,8 @@ export default function Home() {
         </div>
         {/*CTA*/}
         <div className="flex flex-col items-center justify-center space-y-12 w-full px-8 md:px-24 pt-24">
-          <p className={`${rubik.className}  font-extrabold text-6xl text-center`}>Focus on teaching,<br/> not scheduling</p>
-          <p className="font-medium text-gray-500 md:mx-24 text-center w-1/3">Ditch the Stripe Invoicing fee, reduce customer support, and focus on your startup. 1-minute no-code setup.</p>
+          <p className={`${rubik.className}  font-extrabold text-5xl md:text-6xl text-center`}>Focus on teaching,<br/> not scheduling</p>
+          <p className="font-medium text-gray-500 md:mx-24 text-center w-full md:w-1/3">Ditch the Stripe Invoicing fee, reduce customer support, and focus on your startup. 1-minute no-code setup.</p>
           <button onClick={() => router.push("/signup")}  className="px-12 md:px-16 bg-[#eb4c60] text-white text-md py-3 rounded-lg font-semibold">Get Waterlesson</button>
         </div>
         <Footer />

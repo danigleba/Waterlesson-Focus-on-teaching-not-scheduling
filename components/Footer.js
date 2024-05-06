@@ -10,7 +10,7 @@ export default function Footer() {
                         <Image alt="icon" src="/icon.png" width={30} height={40}></Image>
                         <p className="font-semibold text-lg">Waterlesson</p>
                     </div>
-                    <p className="text-sm pt-3 text-center md:text-left">Let students book and pay for your classes with your own scheduling website</p>
+                    <p className="text-sm pt-3 text-center md:text-left w-96">Let students book and pay for your classes with your own scheduling website</p>
                     <p className="text-sm text-center md:text-left">Waterlesson © 2024 All rights reserved</p>
                 </div>
                 <div className="md:flex md:justify-end items-center space-y-12 md:space-y-0 gap-24 text-lg md:text-sm">
