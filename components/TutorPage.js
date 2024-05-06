@@ -113,7 +113,7 @@ export default function TutorPage({ tutor }) {
                 const currentDate = new Date(date)
                 const endDate = new Date(currentDate)
                 endDate.setHours(currentDate.getHours() + 3) //Why 3 and not 1?
-                return endDate.toISOString().replace(".000Z", "+02:00")
+                return endDate?.toISOString().replace(".000Z", "+02:00")
             })
             setEndDates(newEndDates)
         }
@@ -126,7 +126,7 @@ export default function TutorPage({ tutor }) {
     return (
         <main className="text-[#1a100d] bg-white mb-12">
             <div className="top-0 w-full h-24 md:h-36 bg-black">
-                <div className="h-full w-full bg-cover bg-top bg-[url('/banner.jpeg')]"></div>
+                <div className="h-full w-full bg-cover bg-top bg-[url('https://firebasestorage.googleapis.com/v0/b/cornelio-9f37a.appspot.com/o/pexels-daniel-1055379%201.png?alt=media&token=ba5a5dcb-5da4-45b0-8ad3-71d2bdb29261')]"></div>
             </div>
             <div className="md:flex px-6 md:px-24 -mt-12 gap-24 space-y-12 md:space-y-0">
                 {/*Caledar and times*/}
@@ -143,7 +143,7 @@ export default function TutorPage({ tutor }) {
                                 <FaStar />
                             </div>
                         </div>
-                        <p className="font-medium">Book <a className="bg-[#eb4c60] text-white px-1">online {tutor?.language} classes</a> with {tutor?.name}. <br/>Adapted to your level, goals and learning style.</p>
+                        <p className="font-medium">Book <a className="bg-[#eb4c60] text-white px-1">online {tutor?.language} classes</a> with {tutor?.name}.</p>
                     </div>
                     <div className="lg:flex items-start h-full w-full md:gap-6 space-y-6 lg:space-y-0">
                         <div className="w-max flex md:block items-center justify-center">
@@ -154,25 +154,14 @@ export default function TutorPage({ tutor }) {
                                 className="bg-[#f4f4f4] rounded-lg border border-[#dddddd] w-max shadow-[0px_0px_15px_rgb(0,0,0,0.02)]"/>
                         </div>
                         <div className="w-full h-full space-y-3 rounded-lg font-light">
-                            {formatedTimes && date?.getDate() > currentDay && (
-                                <>
-                                    {formatedTimes?.map((item, index) => (
-                                        <div key={index} className="flex items-center justify-between w-full gap-3">
-                                            <div key={index} className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4] duration-200 ease-in-out`}>
-                                                <p className="font-medium text-sm truncate">{item[0]}</p>
-                                            </div>
-                                            <button onClick={() => addDateToCheckout(`${item[0]}`, times[index])} className="flex items-center justify-center w-2/3 py-1 h-11 font-medium rounded-md text-white font-light bg-[#1a100d] truncate px-6">+ Add</button>
-                                        </div>
-                                    ))}
-                                </>
-                            )}
-                            {((formatedTimes && date?.getDate() <= currentDay) || !date) && (
-                                 <div className="flex w-full h-full justify-between items-center gap-3 px-6 pb-6">
-                                    <div className="w-1/6 border-b border-[#1a100d]"></div>
-                                    <p className="font-semibold w-full text-center w-4/6">Choose a day in the future</p>
-                                    <div className="w-1/6 border-b border-[#1a100d]"></div>
+                            {formatedTimes?.map((item, index) => (
+                                <div key={index} className="flex items-center justify-between w-full gap-3">
+                                    <div key={index} className={`flex shadow-[0px_0px_15px_rgb(0,0,0,0.02)] w-full justify-center items-center h-11 px-6 text-center rounded-md border border-[#dddddd] bg-[#f4f4f4] duration-200 ease-in-out`}>
+                                        <p className="font-medium text-sm truncate">{item[0]}</p>
+                                    </div>
+                                    <button onClick={() => addDateToCheckout(`${item[0]}`, times[index])} className="flex items-center justify-center w-2/3 py-1 h-11 font-medium rounded-md text-white font-light bg-[#1a100d] truncate px-6">+ Add</button>
                                 </div>
-                            )}
+                            ))}                    
                             {!formatedTimes && (
                                 <>
                                     <div className="flex items-center justify-between w-full gap-3">

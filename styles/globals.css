@@ -73,4 +73,8 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  h3 {
+    @apply font-extrabold text-3xl md:text-4xl pb-6; 
+  }
 }
