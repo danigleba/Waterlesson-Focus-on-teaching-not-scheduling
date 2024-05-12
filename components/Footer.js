@@ -27,14 +27,14 @@ export default function Footer() {
                         </div>
                     </div>
                     {/*Legal*/}
-                    <div className="text-center md:text-left bg-red-300">
+                    <div className="text-center md:text-left">
                         <p className="font-semibold text-lg pb-2">Legal</p>
                         <div className="space-y-1">
                             <div>
-                                <a href="/terms-of-service" className="hover:underline px-12 md:px-0">Terms of servide</a>
+                                <a href="/terms-of-service" className="hover:underline">Terms of servide</a>
                             </div> 
                             <div>
-                                <a href="/privacy-policy" className="hover:underline px-12 md:px-0">Privacy policy</a>
+                                <a href="/privacy-policy" className="hover:underline">Privacy policy</a>
                             </div>
                         </div>
                     </div>
