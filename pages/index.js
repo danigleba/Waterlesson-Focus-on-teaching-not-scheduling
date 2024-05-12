@@ -9,11 +9,18 @@ import { FaStar } from "react-icons/fa"
 import { FaCheck, FaQ } from "react-icons/fa6"
 import { GoGift } from "react-icons/go"
 import FeaturedOn from "@/components/FeaturedOn"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 import { IoClose } from "react-icons/io5"
 import { FaGoogle } from "react-icons/fa"
 import { FiMinus } from "react-icons/fi"
 import { FaPlus } from "react-icons/fa6"
 import Features from "@/components/Features"
+import { FaCalendar } from "react-icons/fa"
 
 const rubik = Rubik({ subsets: ["latin"] })
 const inter = Inter({ subsets: ["latin"] })
@@ -105,7 +112,7 @@ export default function Home() {
         </div>
          {/*Without Vs. With*/}
          <div className="w-full text-center py-12 md:py-24">
-          <h3 className={`${rubik.className} mb-12`}>Tired of paying crazy fees?</h3>
+          <h3 className={`${rubik.className} mb-12 font-bold text-3xl md:text-4xl px-6`}>Tired of paying crazy fees?</h3>
           <div className="grid gris-cols-1 md:grid-cols-2 gap-12 w-full px-6">
           <div className="flex items-center justify-center md:justify-end w-full h-full text-left">
             <div className="w-full md:w-max h-max bg-[#f9f9f9] text-[#1a100d] px-12 font-semibold text-lg rounded-lg space-y-3 py-10 px-12">
@@ -183,10 +190,32 @@ export default function Home() {
         </div>
         {/*Featues*/}
         <div className="w-full text-center h-full px-6 py-12 md:pt-24">
-          <h3 className={`${rubik.className} text-left md:mx-60`}>Self-service booking for your students</h3>
+          <h3 className={`${rubik.className} text-left md:mx-60 font-bold text-3xl md:text-4xl`}>Self-service booking for your students</h3>
           <div className="flex flex-col md:flex-row gap-0 items-center h-full  md:mx-48">
-            <div className="flex flex-col justify-between h-full w-full text-left md:px-12 ">
-              <Features />               
+            <div className="flex flex-col justify-between h-full w-full text-left md:px-12 py-6 md:py-0">
+              {/*<Features /> */}
+              <Accordion type="single" collapsible>
+              <AccordionItem value="item-1">
+                <AccordionTrigger>1. Connect your calendar</AccordionTrigger>
+                <AccordionContent>
+                  Add one or multiple Stripe accounts to ZenVoice. It takes less than a minute. No coding required.'
+                  <p className="pt-3 flex items-center justify-start gap-2 font-semibold"><FaCalendar size={14}/>Connected to your calendar</p>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger>2. Share your Waterlesson link</AccordionTrigger>
+                <AccordionContent>
+                  Add one or multiple Stripe accounts to ZenVoice. It takes less than a minute. No coding required.'
+                  <p className="pt-3 flex items-center justify-start gap-2 font-semibold"><FaCalendar size={14}/>Connected to your calendar</p>                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem className="border-none" value="item-3">
+                <AccordionTrigger>3. Your clients buy classes</AccordionTrigger>
+                <AccordionContent>
+                  Add one or multiple Stripe accounts to ZenVoice. It takes less than a minute. No coding required.'
+                  <p className="pt-3 flex items-center justify-start gap-2 font-semibold"><FaCalendar size={14}/>Connected to your calendar</p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>              
             </div>
             <div className="flex items-center justify-center w-full aspect-square rounded-xl md:mr-12">
                 <div className="w-full aspect-square pmd:w-4/5 md:h-4/5 bg-gray-700 rounded-xl"></div>
@@ -217,7 +246,7 @@ export default function Home() {
             <div className="w-max px-6 h-full py-1 text-xs font-medium animate-pulse rounded-full text-white bg-[#1a100d]">
               <p>✨ Launch Discount - 50% OFF ✨</p>
             </div>
-            <h3 className="text-5xl">Stop giving out<br/> your time and money</h3>
+            <h3 className="text-3xl md:text-5xl font-bold">Stop giving out<br/> your time and money</h3>
             <p className="font-medium text-gray-500 md:mx-24">Ditch the Stripe Invoicing fee, reduce customer support, and focus on your startup. 1-minute no-code setup.</p>
           </div>
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 w-full md:w-2/3 h-full px-6 md:px-8">
@@ -291,7 +320,34 @@ export default function Home() {
             <p className="font-bold text-[#eb4c60] pb-3">FAQ</p>
             <p className={`${rubik.className} font-bold text-3xl`}>Frequently Asked Questions</p>
           </div>
-          <FAQ />
+            <Accordion type="single" collapsible>
+              <AccordionItem value="item-1">
+                <AccordionTrigger>1. Connect your calendar</AccordionTrigger>
+                <AccordionContent>
+                  Add one or multiple Stripe accounts to ZenVoice. It takes less than a minute. No coding required.'
+                  <p className="pt-3 flex items-center justify-start gap-2 font-semibold"><FaCalendar size={14}/>Connected to your calendar</p>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger>2. Share your Waterlesson link</AccordionTrigger>
+                <AccordionContent>
+                  Add one or multiple Stripe accounts to ZenVoice. It takes less than a minute. No coding required.'
+                  <p className="pt-3 flex items-center justify-start gap-2 font-semibold"><FaCalendar size={14}/>Connected to your calendar</p>                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3">
+                <AccordionTrigger>2. Share your Waterlesson link</AccordionTrigger>
+                <AccordionContent>
+                  Add one or multiple Stripe accounts to ZenVoice. It takes less than a minute. No coding required.'
+                  <p className="pt-3 flex items-center justify-start gap-2 font-semibold"><FaCalendar size={14}/>Connected to your calendar</p>                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem className="border-none" value="item-4">
+                <AccordionTrigger>3. Your clients buy classes</AccordionTrigger>
+                <AccordionContent>
+                  Add one or multiple Stripe accounts to ZenVoice. It takes less than a minute. No coding required.'
+                  <p className="pt-3 flex items-center justify-start gap-2 font-semibold"><FaCalendar size={14}/>Connected to your calendar</p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>   
         </div>
         {/*Testimonial*/}
         <div className="flex flex-col items-center justify-center gap-6 pb-32 px-6 md:px-8 text-center h-full rounded-lg">
@@ -313,7 +369,7 @@ export default function Home() {
         </div>
         {/*CTA*/}
         <div className="flex flex-col items-center justify-center space-y-12 w-full px-8 md:px-24 pt-24">
-          <p className={`${rubik.className}  font-extrabold text-5xl md:text-6xl text-center`}>Focus on teaching,<br/> not scheduling</p>
+          <p className={`${rubik.className}  font-extrabold text-3xl md:text-6xl text-center`}>Focus on teaching,<br/> not scheduling</p>
           <p className="font-medium text-gray-500 md:mx-24 text-center w-full md:w-1/3">Ditch the Stripe Invoicing fee, reduce customer support, and focus on your startup. 1-minute no-code setup.</p>
           <button onClick={() => router.push("/signup")}  className="px-12 md:px-16 bg-[#eb4c60] text-white text-md py-3 rounded-lg font-semibold">Get Waterlesson</button>
         </div>

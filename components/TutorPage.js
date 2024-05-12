@@ -6,6 +6,7 @@ import CheckoutForm from "@/components/CheckoutForm"
 import { Calendar } from "@/components/ui/calendar"
 import { HiTrash } from "react-icons/hi2"
 import { FaStar } from "react-icons/fa"
+import Calendar2 from "./Calendar"
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST)
 
@@ -130,7 +131,7 @@ export default function TutorPage({ tutor }) {
             </div>
             <div className="md:flex px-6 md:px-24 -mt-12 gap-24 space-y-12 md:space-y-0">
                 {/*Caledar and times*/}
-                <div className="flex flex-col items-start justify-start w-full lg:w-2/3 gap-6">
+                <div className="flex flex-col items-start justify-start w-full w-full gap-6">
                     <div>
                         <div className="w-32 border-white border-4 aspect-square rounded-xl bg-cover bg-bottom bg-[#dddddd] overflow-hidden flex items-end"><Image alt="Profile picture" priority={true} width={150} height={150} src={tutor?.profile_url}/></div>
                         <div className="flex items-center mt-3 gap-2">
@@ -145,7 +146,8 @@ export default function TutorPage({ tutor }) {
                         </div>
                         <p className="font-medium">Book <a className="bg-[#eb4c60] text-white px-1">online {tutor?.language} classes</a> with {tutor?.name}.</p>
                     </div>
-                    <div className="lg:flex items-start h-full w-full md:gap-6 space-y-6 lg:space-y-0">
+                    <Calendar2 />
+                    {/*<div className="lg:flex items-start h-full w-full md:gap-6 space-y-6 lg:space-y-0">
                         <div className="w-max flex md:block items-center justify-center">
                             <Calendar
                                 mode="single"
@@ -185,7 +187,7 @@ export default function TutorPage({ tutor }) {
                                 </>
                             )}
                         </div>                        
-                    </div>
+                    </div>*/}
                 </div>
                 {/*Checkout modal*/}
                 <div className="lg:w-1/3 h-full border border-[#dddddd] shadow-[0px_0px_15px_rgb(0,0,0,0.02)] rounded-md bg-white text-center p-6 space-y-6">

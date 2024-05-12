@@ -3,14 +3,14 @@ import Image from "next/image"
 export default function Footer() {
     return (  
         <footer className="w-full h-full border-t border-[#dddddd] pb-24 mt-48 bg-[#f9f9f9] px-24">
-            <div className="grid md:grid-cols-2 grid-cols-1 gap-12 mx-8 md:mx-20 mt-12">
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-12 mx-0 md:mx-20 mt-12">
                 {/*Company summary*/}
                 <div className="flex flex-col items-center md:items-start justify-center">
                     <div className="flex items-center justify-center md:justify-start gap-2">
                         <Image alt="icon" src="/icon.png" width={30} height={40}></Image>
                         <p className="font-semibold text-lg">Waterlesson</p>
                     </div>
-                    <p className="text-sm pt-3 text-center md:text-left w-96">Let students book and pay for your classes with your own scheduling website</p>
+                    <p className="text-sm pt-3 text-center md:text-left w-full md:w-1/2">Let students book and pay for your classes with your own scheduling website</p>
                     <p className="text-sm text-center md:text-left">Waterlesson © 2024 All rights reserved</p>
                 </div>
                 <div className="md:flex md:justify-end items-center space-y-12 md:space-y-0 gap-24 text-lg md:text-sm">
@@ -27,7 +27,7 @@ export default function Footer() {
                         </div>
                     </div>
                     {/*Legal*/}
-                    <div className="text-center md:text-left">
+                    <div className="text-center md:text-left bg-red-300">
                         <p className="font-semibold text-lg pb-2">Legal</p>
                         <div className="space-y-1">
                             <div>
